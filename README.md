@@ -635,6 +635,16 @@ Silently ignore these; they are left in the format only for completeness:
 
 ---
 
+## Sharing `.wif` files on macOS and iOS
+
+Apple platforms identify file types by Uniform Type Identifier (UTI), not by extension, so
+every app that reads or writes WIF should declare the same shared UTI,
+`org.wif-format.wif`. See **[Sharing the `.wif` File Type on macOS and iOS](apple-uti-setup.md)**
+for the `Info.plist` setup in Xcode, including a transitional setup for apps that already
+shipped with a private WIF UTI.
+
+---
+
 ## Proposals
 
 The format has not changed since 1997. Two draft proposals for how it might evolve are open for
