@@ -1,0 +1,53 @@
+{
+  "$schema": "https://wif-format.org/schema/wif2.schema.json",
+  "wif": 2,
+  "title": "Advancing twill (lift plan)",
+  "notes": "An 8-shaft advancing twill for a table or dobby loom. There is no tie-up: each pick lists the shafts it raises.\nThe threading is a straight draw; the lift plan advances one shaft each pick.",
+  "source": { "program": "WIF 2 example", "version": "0.1" },
+  "created": "2026-08-30",
+  "weaveType": "balanced",
+
+  "loom": { "type": "lift-plan", "shafts": 8, "shed": "rising" },
+
+  "yarns": {
+    "grey": {
+      "fiber": "wool",
+      "size": { "label": "18/2" },
+      "color": { "name": "Heather grey", "rgb": [120, 120, 128] }
+    }
+  },
+
+  "warp": {
+    "sett": 20,
+    "unit": "inch",
+    "sequence": [
+      { "repeat": 10, "of": [
+        { "yarn": "grey", "shaft": 1 },
+        { "yarn": "grey", "shaft": 2 },
+        { "yarn": "grey", "shaft": 3 },
+        { "yarn": "grey", "shaft": 4 },
+        { "yarn": "grey", "shaft": 5 },
+        { "yarn": "grey", "shaft": 6 },
+        { "yarn": "grey", "shaft": 7 },
+        { "yarn": "grey", "shaft": 8 }
+      ]}
+    ]
+  },
+
+  "weft": {
+    "ppi": 20,
+    "unit": "inch",
+    "sequence": [
+      { "repeat": 10, "of": [
+        { "yarn": "grey", "shafts": [1, 2, 3] },
+        { "yarn": "grey", "shafts": [2, 3, 4] },
+        { "yarn": "grey", "shafts": [3, 4, 5] },
+        { "yarn": "grey", "shafts": [4, 5, 6] },
+        { "yarn": "grey", "shafts": [5, 6, 7] },
+        { "yarn": "grey", "shafts": [6, 7, 8] },
+        { "yarn": "grey", "shafts": [7, 8, 1] },
+        { "yarn": "grey", "shafts": [8, 1, 2] }
+      ]}
+    ]
+  }
+}

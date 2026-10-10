@@ -1,0 +1,67 @@
+{
+  "$schema": "https://wif-format.org/schema/wif2.schema.json",
+  "wif": 2,
+  "title": "Rigid heddle plaid",
+  "notes": "Plain weave on a single-heddle rigid-heddle loom. Every end alternates hole and slot; every pick alternates the heddle up and down.\nThe plaid comes entirely from color: a red / black / yellow stripe block repeated in both the warp and the weft.",
+  "source": { "program": "WIF 2 example", "version": "0.1" },
+  "created": "2026-08-30",
+  "weaveType": "balanced",
+
+  "loom": { "type": "rigid-heddle", "heddles": 1 },
+
+  "palette": {
+    "red":    { "name": "Barn red", "rgb": [168, 0, 0] },
+    "black":  { "name": "Black",    "rgb": [5, 5, 5] },
+    "yellow": { "name": "Gold",     "rgb": [231, 224, 85] },
+    "green":  { "name": "Forest",   "rgb": [0, 95, 0] }
+  },
+
+  "yarns": {
+    "red":    { "fiber": "cotton", "size": { "label": "8/2" }, "color": "red" },
+    "black":  { "fiber": "cotton", "size": { "label": "8/2" }, "color": "black" },
+    "yellow": { "fiber": "cotton", "size": { "label": "8/2" }, "color": "yellow" },
+    "green":  { "fiber": "cotton", "size": { "label": "8/2" }, "color": "green" }
+  },
+
+  "warp": {
+    "sett": 12,
+    "unit": "inch",
+    "sequence": [
+      { "repeat": 3, "of": [
+        { "repeat": 4, "of": [
+          { "yarn": "red", "heddle": 1, "slot": false },
+          { "yarn": "red", "heddle": 1, "slot": true }
+        ]},
+        { "repeat": 1, "of": [
+          { "yarn": "black", "heddle": 1, "slot": false },
+          { "yarn": "black", "heddle": 1, "slot": true }
+        ]},
+        { "repeat": 2, "of": [
+          { "yarn": "yellow", "heddle": 1, "slot": false },
+          { "yarn": "yellow", "heddle": 1, "slot": true }
+        ]}
+      ]}
+    ]
+  },
+
+  "weft": {
+    "ppi": 12,
+    "unit": "inch",
+    "sequence": [
+      { "repeat": 3, "of": [
+        { "repeat": 4, "of": [
+          { "yarn": "green", "shed": "up" },
+          { "yarn": "green", "shed": "down" }
+        ]},
+        { "repeat": 1, "of": [
+          { "yarn": "black", "shed": "up" },
+          { "yarn": "black", "shed": "down" }
+        ]},
+        { "repeat": 2, "of": [
+          { "yarn": "yellow", "shed": "up" },
+          { "yarn": "yellow", "shed": "down" }
+        ]}
+      ]}
+    ]
+  }
+}

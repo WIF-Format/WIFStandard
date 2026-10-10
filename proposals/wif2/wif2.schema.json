@@ -1,0 +1,404 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wif-format.org/schema/wif2.schema.json",
+  "title": "WIF 2 weaving draft",
+  "description": "DRAFT proposal for a JSON successor to the 1997 Weaving Information File format. A WIF 2 file is one JSON object describing a weaving draft: the loom, the yarns used, and the warp and weft. Files use the .wif2 extension and are strict JSON (no comments). Unknown properties are permitted everywhere and reserved for future minor versions; a reader must ignore properties it does not recognise. This schema is not the standard; it accompanies the WIF format guide as a proposal.",
+  "type": "object",
+  "required": ["wif"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional. The URL of this schema."
+    },
+    "wif": {
+      "const": 2,
+      "description": "Format major version. Always 2 for this schema."
+    },
+    "title": {
+      "type": "string",
+      "description": "Optional. The name of the draft."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional. Free-text notes from the person who made the draft. May contain newlines."
+    },
+    "author": {
+      "type": "string",
+      "description": "Optional. The author's name only. Contact information (email, phone, address) is deliberately not modelled and should never be written into a shared file."
+    },
+    "source": {
+      "type": "object",
+      "description": "Optional. The program that wrote the file.",
+      "properties": {
+        "program": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Optional. The date the draft was created, as an ISO-8601 calendar date (YYYY-MM-DD)."
+    },
+    "importedFrom": {
+      "type": "string",
+      "description": "Optional. Set when the file was converted from an older format, e.g. \"wif/1.1\"."
+    },
+    "weaveType": {
+      "enum": ["balanced", "warp-faced", "weft-faced", "double-weave", "profile", "double-width", "other"],
+      "description": "Optional. How the drawdown should be interpreted and shaded. A rendering hint, not structural. Maps 1:1 from the WIF 1.1 WEAVETYPE token."
+    },
+    "loom": { "$ref": "#/$defs/loom" },
+    "palette": {
+      "type": "object",
+      "description": "Optional. Reusable named colours, keyed by a stable string id (e.g. \"navy\"). A yarn's `color` may be one of these ids. Swapping the palette recolours every yarn that references it.",
+      "additionalProperties": { "$ref": "#/$defs/color" }
+    },
+    "yarns": {
+      "type": "object",
+      "description": "The yarns used in this draft, keyed by a stable, human-meaningful string id (e.g. \"navy\", \"tabby-white\"). Warp and weft thread groups reference yarns by this id. Use readable ids, not UUIDs.",
+      "additionalProperties": { "$ref": "#/$defs/yarn" }
+    },
+    "warp": { "$ref": "#/$defs/warp" },
+    "weft": { "$ref": "#/$defs/weft" },
+    "tieup": { "$ref": "#/$defs/tieup" },
+    "extensions": {
+      "type": "object",
+      "description": "Optional. Vendor-specific data that WIF 2 does not model (e.g. project-planning figures). Keyed by a short vendor id. The schema does not describe the contents; a reader ignores extensions it does not recognise.",
+      "additionalProperties": true
+    }
+  },
+
+  "$defs": {
+
+    "loom": {
+      "type": "object",
+      "description": "The loom the draft is written for. `type` selects the mechanism.",
+      "properties": {
+        "type": {
+          "enum": ["shaft", "lift-plan", "rigid-heddle"],
+          "default": "shaft",
+          "description": "\"shaft\" — a floor loom with treadles and a tie-up; \"lift-plan\" — a shaft loom worked directly from a lift plan (table loom, dobby, drawloom, or software), no treadles; \"rigid-heddle\". Defaults to \"shaft\"."
+        },
+        "shafts": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64,
+          "description": "Number of shafts. Required for a \"shaft\" or \"lift-plan\" loom."
+        },
+        "treadles": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "\"shaft\" loom: the number of treadles. Defaults to the shaft count. Not used by \"lift-plan\" or \"rigid-heddle\" looms."
+        },
+        "shed": {
+          "enum": ["rising", "sinking"],
+          "default": "rising",
+          "description": "\"shaft\" or \"lift-plan\" loom: \"rising\" raises the shafts named in the tie-up or lift plan (jack loom); \"sinking\" lowers them (countermarch, counterbalance), which inverts the drawdown. Defaults to \"rising\"."
+        },
+        "heddles": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1,
+          "description": "Rigid-heddle loom: the number of heddles. 1 for a plain rigid-heddle loom; 2 or 3 for pickup and pattern work."
+        }
+      },
+      "oneOf": [
+        {
+          "properties": { "type": { "const": "rigid-heddle" } },
+          "required": ["type"]
+        },
+        {
+          "properties": { "type": { "const": "shaft" } },
+          "required": ["shafts"]
+        },
+        {
+          "properties": { "type": { "const": "lift-plan" } },
+          "required": ["type", "shafts"]
+        }
+      ]
+    },
+
+    "color": {
+      "type": "object",
+      "description": "An RGB colour.",
+      "required": ["rgb"],
+      "properties": {
+        "rgb": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 0, "maximum": 255 },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Red, green, blue, each 0-255."
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional. A human name for the colour, e.g. \"Navy\"."
+        }
+      }
+    },
+
+    "yarnSize": {
+      "type": "object",
+      "description": "The size (grist) of a yarn. `label` is authoritative; the rest is optional structure for tools.",
+      "required": ["label"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "The size as a weaver writes it, e.g. \"20/2\", \"8/2 Tencel\", \"Nm 34/2\". This always round-trips; no implementer is required to parse it."
+        },
+        "count": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Optional. The numeric count size, paired with `system`."
+        },
+        "ply": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Optional. Number of plies."
+        },
+        "system": {
+          "type": "string",
+          "description": "Optional. The count system for `count`, e.g. \"cotton-count\", \"worsted\", \"woolen-run\", \"metric-Nm\", \"tex\", \"denier\"."
+        },
+        "wrapsPerInch": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Optional. Measured wraps per inch (WPI)."
+        }
+      }
+    },
+
+    "yarn": {
+      "type": "object",
+      "description": "A yarn: a physical thread with a fibre, a size, and a colour.",
+      "properties": {
+        "fiber": {
+          "type": "string",
+          "description": "Optional. Fibre content, free text, e.g. \"cotton\", \"wool\", \"cotton/linen\"."
+        },
+        "size": { "$ref": "#/$defs/yarnSize" },
+        "color": {
+          "description": "Optional. Either a key into the document's `palette`, or an inline colour object.",
+          "oneOf": [
+            { "type": "string", "description": "A palette id." },
+            { "$ref": "#/$defs/color" }
+          ]
+        },
+        "note": {
+          "type": "string",
+          "description": "Optional. Free text, e.g. brand, colourway, dye lot."
+        }
+      }
+    },
+
+    "warp": {
+      "type": "object",
+      "description": "The warp: the lengthwise threads (ends).",
+      "required": ["sequence"],
+      "properties": {
+        "sett": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Optional. The overall sett in ends per `unit` (EPI in inches). A group's `spacing` overrides it locally."
+        },
+        "unit": {
+          "enum": ["inch", "cm"],
+          "default": "inch",
+          "description": "Unit for `sett` and any group `spacing`. Defaults to \"inch\"."
+        },
+        "sequence": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/warpItem" },
+          "description": "The warp, read from one edge to the other, as an ordered list of thread groups and repeat blocks."
+        }
+      }
+    },
+
+    "weft": {
+      "type": "object",
+      "description": "The weft: the crosswise threads (picks).",
+      "required": ["sequence"],
+      "properties": {
+        "ppi": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Optional. The overall picks per `unit` (PPI in inches). A group's `spacing` overrides it locally."
+        },
+        "unit": {
+          "enum": ["inch", "cm"],
+          "default": "inch",
+          "description": "Unit for `ppi` and any group `spacing`. Defaults to \"inch\"."
+        },
+        "sequence": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/weftItem" },
+          "description": "The weft, pick by pick, as an ordered list of thread groups and repeat blocks."
+        }
+      }
+    },
+
+    "tieup": {
+      "type": "array",
+      "description": "\"shaft\" looms only. Entry i is the array of shafts that treadle (i+1) raises (or lowers, per `loom.shed`). An empty array is an unused treadle. Omitted on \"lift-plan\" and \"rigid-heddle\" drafts.",
+      "items": {
+        "type": "array",
+        "items": { "type": "integer", "minimum": 1 },
+        "uniqueItems": true
+      }
+    },
+
+    "warpItem": {
+      "description": "One entry in a warp sequence: a thread group, or a repeat block.",
+      "oneOf": [
+        { "$ref": "#/$defs/warpThreadGroup" },
+        { "$ref": "#/$defs/warpRepeatGroup" }
+      ]
+    },
+
+    "warpThreadGroup": {
+      "type": "object",
+      "description": "A run of consecutive warp ends of one yarn, threaded the same way. Exactly one of `shaft`, `shafts`, or `heddle` identifies the threading.",
+      "required": ["yarn"],
+      "properties": {
+        "yarn": {
+          "type": "string",
+          "description": "A key into `yarns`."
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1,
+          "description": "How many consecutive ends this group is. Defaults to 1."
+        },
+        "spacing": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Optional. Centre-to-centre spacing for these ends, in the warp `unit`, overriding the overall `sett`."
+        },
+        "shaft": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "\"shaft\" or \"lift-plan\" loom: the shaft each end in this group passes through. 0 = not threaded."
+        },
+        "shafts": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 },
+          "minItems": 2,
+          "uniqueItems": true,
+          "description": "\"shaft\" or \"lift-plan\" loom: for the rare end threaded through heddles on more than one shaft."
+        },
+        "heddle": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Rigid-heddle loom: which heddle these ends go through (1 on a single-heddle loom)."
+        },
+        "slot": {
+          "type": "boolean",
+          "default": false,
+          "description": "Rigid-heddle loom: false = threaded through a hole (moves with the heddle), true = through a slot (floats). Only meaningful with `heddle`."
+        }
+      },
+      "oneOf": [
+        { "required": ["shaft"] },
+        { "required": ["shafts"] },
+        { "required": ["heddle"] }
+      ]
+    },
+
+    "warpRepeatGroup": {
+      "type": "object",
+      "description": "A block of warp entries repeated a number of times.",
+      "required": ["repeat", "of"],
+      "properties": {
+        "repeat": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "How many times to repeat the `of` block."
+        },
+        "of": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/warpItem" },
+          "minItems": 1,
+          "description": "The block to repeat. May itself contain repeat blocks."
+        }
+      }
+    },
+
+    "weftItem": {
+      "description": "One entry in a weft sequence: a thread group, or a repeat block.",
+      "oneOf": [
+        { "$ref": "#/$defs/weftThreadGroup" },
+        { "$ref": "#/$defs/weftRepeatGroup" }
+      ]
+    },
+
+    "weftThreadGroup": {
+      "type": "object",
+      "description": "A run of consecutive weft picks of one yarn, woven the same way. Exactly one of `treadles`, `shafts`, or `shed` identifies the shed.",
+      "required": ["yarn"],
+      "properties": {
+        "yarn": {
+          "type": "string",
+          "description": "A key into `yarns`."
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1,
+          "description": "How many consecutive picks this group is. Defaults to 1."
+        },
+        "spacing": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Optional. Centre-to-centre spacing for these picks, in the weft `unit`, overriding the overall `ppi`."
+        },
+        "treadles": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 0 },
+          "description": "\"shaft\" loom: the treadle(s) pressed for these picks, resolved through `tieup`. [] or [0] is a blank pick. More than one treadle is multi-treadling."
+        },
+        "shafts": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 0 },
+          "description": "\"lift-plan\" loom: the shafts raised for these picks, given directly, with no tie-up. [] is a blank pick."
+        },
+        "shed": {
+          "description": "Rigid-heddle loom: the heddle position for these picks.",
+          "oneOf": [
+            { "enum": ["up", "down", "neutral"] },
+            {
+              "type": "array",
+              "items": { "enum": ["up", "down", "neutral"] },
+              "minItems": 1,
+              "description": "One entry per heddle, for multi-heddle looms."
+            }
+          ]
+        }
+      },
+      "oneOf": [
+        { "required": ["treadles"] },
+        { "required": ["shafts"] },
+        { "required": ["shed"] }
+      ]
+    },
+
+    "weftRepeatGroup": {
+      "type": "object",
+      "description": "A block of weft entries repeated a number of times.",
+      "required": ["repeat", "of"],
+      "properties": {
+        "repeat": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "How many times to repeat the `of` block."
+        },
+        "of": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/weftItem" },
+          "minItems": 1,
+          "description": "The block to repeat. May itself contain repeat blocks."
+        }
+      }
+    }
+  }
+}

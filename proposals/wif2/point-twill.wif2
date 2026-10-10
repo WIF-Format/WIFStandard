@@ -1,0 +1,78 @@
+{
+  "$schema": "https://wif-format.org/schema/wif2.schema.json",
+  "wif": 2,
+  "title": "Point twill sample",
+  "notes": "A 2/2 twill on a 4-shaft point threading, woven in a straight twill treadling.\nThe warp alternates navy and natural for a color-and-weave effect; the weft does the same, offset by one shaft.\nWoven as a square sample; repeat the warp block and the treadling to make a scarf.",
+  "author": "Sample",
+  "source": { "program": "WIF 2 example", "version": "0.1" },
+  "created": "2026-08-30",
+  "weaveType": "balanced",
+
+  "loom": { "type": "shaft", "shafts": 4, "treadles": 4, "shed": "rising" },
+
+  "palette": {
+    "navy": { "name": "Navy", "rgb": [30, 40, 90] },
+    "natural": { "name": "Natural", "rgb": [242, 236, 220] }
+  },
+
+  "yarns": {
+    "navy": {
+      "fiber": "cotton",
+      "size": { "label": "20/2", "count": 20, "ply": 2, "system": "cotton-count", "wrapsPerInch": 36 },
+      "color": "navy"
+    },
+    "natural": {
+      "fiber": "cotton",
+      "size": { "label": "20/2", "count": 20, "ply": 2, "system": "cotton-count" },
+      "color": "natural"
+    }
+  },
+
+  "warp": {
+    "sett": 24,
+    "unit": "inch",
+    "sequence": [
+      { "yarn": "navy", "shaft": 1, "count": 2 },
+      { "yarn": "navy", "shaft": 2, "count": 2 },
+
+      { "repeat": 8, "of": [
+        { "yarn": "navy",    "shaft": 1 },
+        { "yarn": "natural", "shaft": 2 },
+        { "yarn": "navy",    "shaft": 3 },
+        { "yarn": "natural", "shaft": 4 },
+        { "yarn": "navy",    "shaft": 3 },
+        { "yarn": "natural", "shaft": 2 }
+      ]},
+
+      { "yarn": "navy", "shaft": 3, "count": 2 },
+      { "yarn": "navy", "shaft": 4, "count": 2 }
+    ]
+  },
+
+  "tieup": [
+    [1, 2],
+    [2, 3],
+    [3, 4],
+    [1, 4]
+  ],
+
+  "weft": {
+    "ppi": 24,
+    "unit": "inch",
+    "sequence": [
+      { "repeat": 14, "of": [
+        { "yarn": "navy",    "treadles": [1] },
+        { "yarn": "natural", "treadles": [2] },
+        { "yarn": "navy",    "treadles": [3] },
+        { "yarn": "natural", "treadles": [4] }
+      ]}
+    ]
+  },
+
+  "extensions": {
+    "weaveit": {
+      "shrinkage": 0.08,
+      "loomWaste": 24
+    }
+  }
+}
