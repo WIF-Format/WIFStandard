@@ -1,0 +1,38 @@
+# Weaving Information File (WIF)
+
+> WIF is an open, plain-text file format for exchanging weaving drafts (threading, tie-up, treadling or lift plan, and colors) between weaving programs and computerized looms. WIF 1.1 (1997, INI text, `.wif`) is the current standard and the only version software supports. WIF 1.2 (INI, additive over 1.1) and WIF 2 (JSON, `.wif2`) are draft proposals; do not implement them.
+
+Each version has a plain-language guide, a reference specification (a JSON Schema for WIF 2), and complete example files. All pages are Markdown. Licensed CC BY 4.0; the format itself is unowned.
+
+## Overview
+
+- [Overview](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/README.md): what WIF is, the versions and their status, weaving terms, file types, history, license
+- [Sharing the .wif file type on macOS and iOS](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/apple-uti-setup.md): Info.plist setup for the shared UTI `org.wif-format.wif`
+
+## WIF 1.1 (current standard)
+
+- [WIF 1.1 guide](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/v1.1/wif-format_v1_1_guide.md): plain-language description of every section, sparse-data defaults, notes for implementers, obsolete parts
+- [WIF 1.1 specification](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/v1.1/wif-format_v1_1.md): every section and key in Key | Type | Notes tables
+- [twill-color-and-weave.wif](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/v1.1/twill-color-and-weave.wif): complete example, 2-2 twill on 4 shafts
+
+## WIF 1.2 (draft proposal)
+
+- [WIF 1.2 guide](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif1.2-proposal/v1.2/wif-format_v1_2_guide.md): plain-language description of 1.2, with each change from 1.1 marked
+- [WIF 1.2 specification](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif1.2-proposal/v1.2/wif-format_v1_2.md): reference tables, 1.2 additions marked
+- [WIF 1.2 proposal](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif1.2-proposal/v1.2/proposal.md): rationale for each change and open questions
+- [twill-color-and-weave.wif](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif1.2-proposal/v1.2/twill-color-and-weave.wif): complete example, floor loom with yarn table and repeats
+- [rigid-heddle-plain.wif](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif1.2-proposal/v1.2/rigid-heddle-plain.wif): complete example, rigid-heddle plain weave
+
+## WIF 2 (draft proposal)
+
+- [WIF 2 guide](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif2-proposal/v2/wif-format_v2_guide.md): plain-language description of the JSON format
+- [WIF 2 schema](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif2-proposal/v2/wif2.schema.json): JSON Schema (Draft 2020-12); this is the specification
+- [WIF 2 proposal](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif2-proposal/v2/proposal.md): rationale, mapping from WIF 1.1, open questions
+- [point-twill.wif2](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif2-proposal/v2/point-twill.wif2): complete example, 4-shaft floor loom
+- [lift-plan.wif2](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif2-proposal/v2/lift-plan.wif2): complete example, 8-shaft dobby
+- [rigid-heddle-plaid.wif2](https://raw.githubusercontent.com/WIF-Format/WIFStandard/wif2-proposal/v2/rigid-heddle-plaid.wif2): complete example, rigid heddle
+
+## Optional
+
+- [Original WIF 1.1 text (historical)](http://www.tantradharma.com/maplehill/wif/wif1-1.txt): Copyright 1996, 1997 Ravi Nielsen; not reproduced on this site
+- [wif-format.org](https://wif-format.org): project site
