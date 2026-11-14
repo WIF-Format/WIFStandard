@@ -1,0 +1,64 @@
+# Builds developer.wif-format.org from main, plus the proposal folders that
+# live on their own branches, so the site always shows every proposal's
+# latest text while discussion stays on each proposal's pull request.
+#
+# Requires Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+name: Publish site
+
+on:
+  push:
+    branches: [main, wif1.2-proposal, wif2-proposal]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Add proposal folders from their branches
+        run: |
+          # branch:folder. A folder already on main (a merged proposal) wins.
+          for entry in wif1.2-proposal:v1.2 wif2-proposal:v2; do
+            branch="${entry%%:*}"; folder="${entry##*:}"
+            if [ -d "$folder" ]; then
+              echo "$folder is already on main; skipping $branch"
+            elif git fetch --depth 1 origin "$branch"; then
+              git archive FETCH_HEAD "$folder" | tar -x
+              echo "Added $folder from $branch"
+            else
+              echo "::warning::Branch $branch not found; $folder will be missing from the site"
+            fi
+          done
+
+      - uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

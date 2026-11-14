@@ -10,6 +10,22 @@ knows what a threading or a tie-up is but not how it is stored, and a **develope
 to read or write the file correctly. Each version has a guide, a specification, and example
 files.
 
+**Read it as a website:** [developer.wif-format.org](https://developer.wif-format.org), with
+a menu and search.
+
+## Start here
+
+- **Implementing WIF?** Read the **[WIF 1.1 guide](v1.1/wif-format_v1_1_guide.md)**, then
+  the [WIF 1.1 specification](v1.1/wif-format_v1_1.md). WIF 1.1 is the current standard and
+  the only version software supports.
+- **Interested in where WIF goes next?** Two
+  **[proposals are under discussion](proposals.md)**:
+  [WIF 1.2](https://developer.wif-format.org/v1.2/) (comments on
+  [PR #2](https://github.com/WIF-Format/WIFStandard/pull/2)) and
+  [WIF 2](https://developer.wif-format.org/v2/) (comments on
+  [PR #1](https://github.com/WIF-Format/WIFStandard/pull/1)). Do not implement either one yet.
+- **An AI agent?** Start from [`llms.txt`](llms.txt).
+
 ---
 
 ## Versions
@@ -17,14 +33,14 @@ files.
 | Version | Status | Format | Guide | Specification | Examples |
 | --- | --- | --- | --- | --- | --- |
 | **[1.1](v1.1/)** | Current standard (1997) | INI text, `.wif` | [Guide](v1.1/wif-format_v1_1_guide.md) | [Spec](v1.1/wif-format_v1_1.md) | [`.wif`](v1.1/twill-color-and-weave.wif) |
-| **[1.2](https://github.com/WIF-Format/WIFStandard/tree/wif1.2-proposal/v1.2)** | Draft proposal | INI text, `.wif` | [Guide](https://github.com/WIF-Format/WIFStandard/blob/wif1.2-proposal/v1.2/wif-format_v1_2_guide.md) | [Spec](https://github.com/WIF-Format/WIFStandard/blob/wif1.2-proposal/v1.2/wif-format_v1_2.md) | [folder](https://github.com/WIF-Format/WIFStandard/tree/wif1.2-proposal/v1.2) |
-| **[2](https://github.com/WIF-Format/WIFStandard/tree/wif2-proposal/v2)** | Draft proposal | JSON, `.wif2` | [Guide](https://github.com/WIF-Format/WIFStandard/blob/wif2-proposal/v2/wif-format_v2_guide.md) | [Schema](https://github.com/WIF-Format/WIFStandard/blob/wif2-proposal/v2/wif2.schema.json) | [folder](https://github.com/WIF-Format/WIFStandard/tree/wif2-proposal/v2) |
+| **[1.2](https://developer.wif-format.org/v1.2/)** | Draft proposal | INI text, `.wif` | [Guide](https://developer.wif-format.org/v1.2/wif-format_v1_2_guide.html) | [Spec](https://developer.wif-format.org/v1.2/wif-format_v1_2.html) | [folder](https://github.com/WIF-Format/WIFStandard/tree/wif1.2-proposal/v1.2) |
+| **[2](https://developer.wif-format.org/v2/)** | Draft proposal | JSON, `.wif2` | [Guide](https://developer.wif-format.org/v2/wif-format_v2_guide.html) | [Schema](https://developer.wif-format.org/v2/wif2.schema.json) | [folder](https://github.com/WIF-Format/WIFStandard/tree/wif2-proposal/v2) |
 
 **Which one should I use?** Read and write **WIF 1.1**. It is the only version software
 supports today. The two proposals are open for discussion and nothing in them is decided:
 
 - **WIF 1.2** stays in the INI text format, standardizes the extensions that already ship in
-  the field, and formally retires the parts nothing implements. Every 1.1 file is a valid 1.2
+  the field, and formally deprecates the parts nothing implements. Every 1.1 file is a valid 1.2
   file. Comments go on [PR #2](https://github.com/WIF-Format/WIFStandard/pull/2).
 - **WIF 2** is a larger rewrite to JSON, with a published schema and a normalized data model.
   Comments go on [PR #1](https://github.com/WIF-Format/WIFStandard/pull/1).
