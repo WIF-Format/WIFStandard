@@ -1,2 +1,103 @@
 title: Weaving Information File (WIF)
 description: Plain-language guides, specifications, and examples for the WIF weaving-draft format.
+url: https://developer.wif-format.org
+
+# Left-hand navigation, search, and layout come from the Just the Docs theme.
+remote_theme: just-the-docs/just-the-docs@v0.10.1
+
+# These are on by default for GitHub Pages builds; listed so local builds match.
+plugins:
+  - jekyll-remote-theme
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-relative-links
+  - jekyll-titles-from-headings
+
+relative_links:
+  enabled: true
+  collections: false
+
+search_enabled: true
+heading_anchors: true
+color_scheme: light
+back_to_top: true
+back_to_top_text: Back to top
+
+aux_links:
+  "WIF on GitHub": https://github.com/WIF-Format/WIFStandard
+  "wif-format.org": https://wif-format.org
+
+footer_content: >-
+  These documents are licensed
+  <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+  The WIF format itself is unowned. See the <a href="https://github.com/WIF-Format/WIFStandard/blob/main/LICENSE">license</a>.
+
+exclude:
+  - wif1-1.txt
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .github
+
+# ---------------------------------------------------------------------------
+# Menu structure.
+#
+# Navigation titles, order, and nesting are set here, by path, rather than in
+# front matter at the top of each Markdown file. This keeps every page clean
+# when it is read directly on GitHub.
+#
+# The v1.2/ and v2/ folders live on their proposal branches; the Pages
+# workflow (.github/workflows/pages.yml) copies them in at build time.
+# ---------------------------------------------------------------------------
+defaults:
+  - scope: { path: "" }
+    values: { layout: default }
+
+  # Overview (README.md becomes the home page)
+  - scope: { path: "README.md" }
+    values: { title: Overview, nav_order: 1, permalink: / }
+
+  # Proposals landing page
+  - scope: { path: "proposals.md" }
+    values: { title: Proposals under discussion, nav_order: 3, has_children: true }
+
+  - scope: { path: "apple-uti-setup.md" }
+    values: { title: Sharing .wif on macOS and iOS, nav_order: 4 }
+
+  # WIF 1.1 — current standard
+  - scope: { path: "v1.1/README.md" }
+    values: { title: "WIF 1.1 (current standard)", nav_order: 2, has_children: true }
+  - scope: { path: "v1.1/wif-format_v1_1_guide.md" }
+    values: { title: Guide, parent: "WIF 1.1 (current standard)", nav_order: 1 }
+  - scope: { path: "v1.1/wif-format_v1_1.md" }
+    values: { title: Specification, parent: "WIF 1.1 (current standard)", nav_order: 2 }
+
+  # WIF 1.2 — draft proposal
+  - scope: { path: "v1.2" }
+    values:
+      layout: proposal
+      proposal_name: WIF 1.2
+      proposal_pr: https://github.com/WIF-Format/WIFStandard/pull/2
+      proposal_branch: wif1.2-proposal
+  - scope: { path: "v1.2/README.md" }
+    values: { title: "WIF 1.2 (draft)", parent: Proposals under discussion, nav_order: 1, has_children: true }
+  - scope: { path: "v1.2/wif-format_v1_2_guide.md" }
+    values: { parent: "WIF 1.2 (draft)", grand_parent: Proposals under discussion, title: Guide, nav_order: 1 }
+  - scope: { path: "v1.2/wif-format_v1_2.md" }
+    values: { parent: "WIF 1.2 (draft)", grand_parent: Proposals under discussion, title: Specification, nav_order: 2 }
+  - scope: { path: "v1.2/proposal.md" }
+    values: { parent: "WIF 1.2 (draft)", grand_parent: Proposals under discussion, title: Proposal and rationale, nav_order: 3 }
+
+  # WIF 2 — draft proposal
+  - scope: { path: "v2" }
+    values:
+      layout: proposal
+      proposal_name: WIF 2
+      proposal_pr: https://github.com/WIF-Format/WIFStandard/pull/1
+      proposal_branch: wif2-proposal
+  - scope: { path: "v2/README.md" }
+    values: { title: "WIF 2 (draft)", parent: Proposals under discussion, nav_order: 2, has_children: true }
+  - scope: { path: "v2/wif-format_v2_guide.md" }
+    values: { parent: "WIF 2 (draft)", grand_parent: Proposals under discussion, title: Guide, nav_order: 1 }
+  - scope: { path: "v2/proposal.md" }
+    values: { parent: "WIF 2 (draft)", grand_parent: Proposals under discussion, title: Proposal and rationale, nav_order: 2 }
