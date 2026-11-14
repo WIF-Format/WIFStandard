@@ -10,8 +10,12 @@ knows what a threading or a tie-up is but not how it is stored, and a **develope
 to read or write the file correctly. Each version has a guide, a specification, and example
 files.
 
+<div class="github-only" markdown="1">
+
 **Read it as a website:** [developer.wif-format.org](https://developer.wif-format.org), with
 a menu and search.
+
+</div>
 
 ## Start here
 

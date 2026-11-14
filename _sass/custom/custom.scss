@@ -60,3 +60,7 @@ input:focus-visible {
 }
 .draft-banner p { margin: 0; }
 .draft-banner a { color: #0550ae; }
+
+// Content meant only for readers on GitHub, such as the README's pointer
+// to this website. GitHub ignores the class and shows it as usual.
+.github-only { display: none; }
