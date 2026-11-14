@@ -1,0 +1,16 @@
+// High-contrast light scheme. Every text/background pair meets WCAG AA
+// (4.5:1); body text and links meet AAA (7:1) on white and on the sidebar.
+$color-scheme: light;
+$body-background-color: #ffffff;
+$body-heading-color: #1b1f24;      // 16:1 on white
+$body-text-color: #24292f;         // 14.7:1 on white
+$link-color: #0550ae;              // 7.6:1 on white, 7.1:1 on the sidebar
+$nav-child-link-color: #2f363d;    // 11.5:1 on the sidebar
+$sidebar-color: #f6f8fa;
+$border-color: #d0d7de;
+$btn-primary-color: #0550ae;
+$code-background-color: #f6f8fa;
+$feedback-color: #e8edf3;
+$table-background-color: #ffffff;
+$search-background-color: #ffffff;
+$search-result-preview-color: #57606a; // 6.4:1 on white

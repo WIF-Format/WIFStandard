@@ -1,8 +1,62 @@
+// Site title: a short mark over the full name, so it never wraps out of the header.
+.wif-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.wif-title__mark {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $body-heading-color;
+}
+.wif-title__name {
+  font-size: 0.875rem !important;
+  color: $body-text-color;
+}
+
+// Keep the sidebar a fixed width against the left edge on wide screens,
+// instead of stretching it to fill the space left of a centered page.
+.side-bar {
+  @include mq(lg) {
+    width: $nav-width;
+    align-items: stretch;
+  }
+
+  & + .main {
+    @include mq(lg) {
+      margin-left: $nav-width;
+    }
+  }
+}
+
+// Make the current page obvious without relying on color alone.
+.nav-list .nav-list-item .nav-list-link.active {
+  font-weight: 600;
+  color: $body-heading-color;
+  box-shadow: inset 3px 0 0 $link-color;
+}
+
+// Visible keyboard focus everywhere.
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid $link-color;
+  outline-offset: 2px;
+}
+
+// Links stay clearly underlined in body text.
+.main-content a:not(.anchor-heading) {
+  text-decoration-color: currentColor;
+  text-underline-offset: 2px;
+}
+
 .draft-banner {
   margin: 0 0 1.5rem;
   padding: 0.75rem 1rem;
-  border-left: 4px solid #d4a72c;
+  border-left: 4px solid #9a6700;
   background: #fff8c5;
+  color: #24292f;
   border-radius: 4px;
 }
 .draft-banner p { margin: 0; }
+.draft-banner a { color: #0550ae; }
