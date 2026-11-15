@@ -4,9 +4,6 @@ A guide for developers setting up an Xcode project so that their app opens and s
 `.wif` files **as a shared file type**. All weaving apps on the system can then open a WIF
 file, and the user stays in control of which app opens it by default.
 
-_Originally written by Sally Breckenridge (Canyon Art WeaveIt) for
-[wif-format.org](https://wif-format.org/)._
-
 ---
 
 ## Overview
