@@ -343,7 +343,7 @@ Valid to read; ignore silently. A 1.2 writer never emits these.
 - **WIF 1.1:** [v1.1](../v1.1/)
 - **Overview of all versions:** [README.md](../README.md)
 - **Original WIF 1.1 text (historical):** [Copyright © 1996, 1997 Ravi Nielsen](http://www.tantradharma.com/maplehill/wif/wif1-1.txt)
-- **Discussion:** [PR #2](https://github.com/WIF-Format/WIFStandard/pull/2)
+- **Discussion:** [pull request 2](https://github.com/WIF-Format/WIFStandard/pull/2) on GitHub ([how to comment](https://developer.wif-format.org/proposals.html#how-to-comment))
 
 ---
 

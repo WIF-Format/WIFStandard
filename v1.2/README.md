@@ -3,7 +3,8 @@
 **Status:** draft proposal, not adopted · **Format:** INI text · **Extension:** `.wif`
 
 > Nothing here is decided, and no software should implement it yet. Comments go on
-> [PR #2](https://github.com/WIF-Format/WIFStandard/pull/2).
+> [pull request 2](https://github.com/WIF-Format/WIFStandard/pull/2), a discussion page on GitHub
+> ([how to comment](https://developer.wif-format.org/proposals.html#how-to-comment)).
 
 WIF 1.2 is WIF 1.1 with additions: a yarn table, repeat blocks, an explicit loom type
 (including rigid heddle), UTF-8 text, and ISO dates. Every 1.1 file is a valid 1.2 file, and a

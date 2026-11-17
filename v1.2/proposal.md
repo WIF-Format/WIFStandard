@@ -13,7 +13,7 @@ This page explains *why* each change is proposed.
 WIF 1.1 has not changed since 1997. This is the conservative path forward: a revision that
 **stays in the INI text format**, formalizes the extensions that have already shipped in the field,
 and formally deprecates the parts no current program implements. A companion proposal
-([PR #1](https://github.com/WIF-Format/WIFStandard/pull/1), `v2/`) explores a larger JSON
+([WIF 2](https://developer.wif-format.org/v2/), discussed on [pull request 1](https://github.com/WIF-Format/WIFStandard/pull/1)) explores a larger JSON
 rewrite; the two are not exclusive.
 
 ## Principles
