@@ -44,15 +44,11 @@ python3 -c "import json, jsonschema; jsonschema.validate(json.load(open('point-t
 
 ## Terminology
 
+For weaving words such as *warp*, *end*, *shaft* and *tie-up*, see
+[Weaving terms](https://developer.wif-format.org/glossary.html). This guide also uses these words for the parts of the file:
+
 | Term | Meaning |
 | --- | --- |
-| **end** / **pick** | A single warp thread / a single weft thread. |
-| **shaft** | A frame that raises or lowers a group of ends. |
-| **treadle** | A foot pedal on a floor loom, tied to one or more shafts. |
-| **tie-up** | Which shafts each treadle is connected to. |
-| **lift plan** | The shafts raised for each pick, given directly. |
-| **rigid heddle** | A single frame of holes and slots. Ends in holes move with the heddle; ends in slots stay put. |
-| **sett** / **PPI** | Ends per inch (or cm) / picks per inch (or cm). |
 | **object** | A JSON `{ … }` with named fields. |
 | **array** | A JSON `[ … ]` list. |
 | **id** | A short name you give a yarn or color, such as `"navy"` or `"tabby-white"`. |
