@@ -32,9 +32,11 @@ aux_links:
   "wif-format.org": https://wif-format.org
 
 footer_content: >-
-  These documents are licensed
-  <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
-  The WIF format itself is unowned. See the <a href="https://github.com/WIF-Format/WIFStandard/blob/main/LICENSE">license</a>.
+  © 2026 the WIF-Format contributors. Licensed under
+  <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+  (<a href="https://github.com/WIF-Format/WIFStandard/blob/main/LICENSE">license</a>).
+  The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups;
+  original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
 
 exclude:
   - wif1-1.txt

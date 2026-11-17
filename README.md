@@ -128,7 +128,7 @@ claims any right in the format itself, and no one owns it; it is a shared standa
 **These documents** are independent, plain-language descriptions of that format. They do not
 copy or adapt the original specification.
 
-Copyright © 2026 Shannon Young. Licensed under the
+Copyright © 2026 the WIF-Format contributors. Licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)
 (CC BY 4.0). You are free to copy, translate, adapt, and redistribute them, for any purpose
 including commercially, as long as you give appropriate credit and indicate any changes.
