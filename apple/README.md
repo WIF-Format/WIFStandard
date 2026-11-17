@@ -11,7 +11,10 @@ This page explains how a weaving application should declare the WIF file type in
 | [Part 3. macOS](macos.md) | What differs on macOS, the document types, and how to check the result on a Mac. |
 | [Final phase and common mistakes](final-phase.md) | What changes once every app has adopted the shared type, and the mistakes to avoid. |
 
+<div class="github-only" markdown="1">
+
 ---
 
-WIF Specification © 1997 Maple Hill Software
-wif-format.org domain name — initially maintained by Canyon Art, LLC
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](../LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
+
+</div>
