@@ -3,7 +3,8 @@
 **Status:** draft proposal, not adopted · **Format:** JSON · **Extension:** `.wif2`
 
 > Nothing here is decided, and no software should implement it yet. Comments go on
-> [PR #1](https://github.com/WIF-Format/WIFStandard/pull/1).
+> [pull request 1](https://github.com/WIF-Format/WIFStandard/pull/1), a discussion page on GitHub
+> ([how to comment](https://developer.wif-format.org/proposals.html#how-to-comment)).
 
 WIF 2 is a proposed JSON successor to WIF 1.1. It stores a draft the way a weaver thinks about
 it: named yarns, a warp and a weft built from runs and repeats of those yarns, and an explicit
