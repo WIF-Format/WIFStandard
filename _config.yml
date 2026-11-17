@@ -23,10 +23,6 @@ color_scheme: wif
 back_to_top: true
 back_to_top_text: Back to top
 
-nav_external_links:
-  - title: Sharing .wif on macOS
-    url: https://wif-format.org/codeForDevelopers.html
-
 aux_links:
   "WIF on GitHub": https://github.com/WIF-Format/WIFStandard
   "wif-format.org": https://wif-format.org
@@ -42,8 +38,6 @@ exclude:
   - Gemfile.lock
   - vendor
   - .github
-  # Kept in the repository, not published; the menu links to the guide on wif-format.org.
-  - apple-uti-setup.md
 
 # ---------------------------------------------------------------------------
 # Menu structure.
@@ -66,6 +60,18 @@ defaults:
   # Proposals landing page
   - scope: { path: "proposals.md" }
     values: { title: Proposals under discussion, nav_order: 3, has_children: true }
+
+  # Sharing .wif on macOS and iOS
+  - scope: { path: "apple/README.md" }
+    values: { title: Sharing .wif on macOS and iOS, nav_order: 4, has_children: true }
+  - scope: { path: "apple/concepts.md" }
+    values: { title: Part 1. The concepts, parent: Sharing .wif on macOS and iOS, nav_order: 1 }
+  - scope: { path: "apple/ios.md" }
+    values: { title: Part 2. iOS, parent: Sharing .wif on macOS and iOS, nav_order: 2 }
+  - scope: { path: "apple/macos.md" }
+    values: { title: Part 3. macOS, parent: Sharing .wif on macOS and iOS, nav_order: 3 }
+  - scope: { path: "apple/final-phase.md" }
+    values: { title: Final phase and common mistakes, parent: Sharing .wif on macOS and iOS, nav_order: 4 }
 
   # WIF 1.1 — current standard
   - scope: { path: "v1.1/README.md" }

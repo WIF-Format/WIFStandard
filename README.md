@@ -92,7 +92,7 @@ These terms are used the same way in every version.
 
 On Windows a file extension is enough. Apple platforms identify file types by Uniform Type
 Identifier, so every app that reads or writes WIF should declare the same shared one — see
-**[Developer Guide for Sharing wif Format on macOS](https://wif-format.org/codeForDevelopers.html)** on wif-format.org.
+**[Developer Guide: Sharing the .wif Format on macOS and iOS](apple/README.md)**.
 
 ---
 

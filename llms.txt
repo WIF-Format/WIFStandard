@@ -7,7 +7,11 @@ Each version has a plain-language guide, a reference specification (a JSON Schem
 ## Overview
 
 - [Overview](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/README.md): what WIF is, the versions and their status, weaving terms, file types, history, license
-- [Developer Guide for Sharing wif Format on macOS](https://wif-format.org/codeForDevelopers.html): Info.plist setup on macOS for the shared UTI `org.wif-format.wif` (HTML, on wif-format.org)
+- [Developer Guide: Sharing the .wif Format on macOS and iOS](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/apple/README.md): declaring the shared UTI `org.wif-format.wif` in Info.plist so several apps can open .wif files
+  - [Part 1. The concepts](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/apple/concepts.md): UTIs, the shared type, and the rules every app follows
+  - [Part 2. iOS](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/apple/ios.md): iOS Info.plist declarations, scene delegates, thumbnail extensions, checking on a device
+  - [Part 3. macOS](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/apple/macos.md): macOS differences, document types, checking with mdls
+  - [Final phase and common mistakes](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/apple/final-phase.md): after every app adopts the shared type; mistakes to avoid
 - [Proposals under discussion](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/proposals.md): the WIF 1.2 and WIF 2 drafts, their status, and where to comment
 
 ## WIF 1.1 (current standard)
