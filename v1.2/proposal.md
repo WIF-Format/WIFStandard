@@ -172,12 +172,17 @@ The **WIF Symbol data type** (`42` / `X` / `'X'` / `#219`) is deprecated with th
 
 | Keyline | Why |
 | --- | --- |
-| `[WIF] Developers=` and any email keyline | Privacy — a shared file must not carry a contact address. |
+| An email address in `[WIF] Developers=`, and any other email keyline | Privacy — a shared file must not carry a contact address. |
 | `[TEXT] Address=`, `EMail=`, `Telephone=`, `FAX=` | Privacy. Ignore on read; never write. |
 | `[WARP]` / `[WEFT]` `Colors=`, `Palette=`, `ColorMix=` | Superseded by the color table (already obsolete in 1.1). |
 | `[WARP]` / `[WEFT]` `Symbol=`, `Symbol Number=`, `Spacing Zoom=`, `Thickness Zoom=` | Go with the deprecated symbol / zoom sections. |
 | `[WEAVING] Profile=` | Obsolete constant. |
 | `Units=Decipoints` | Never appears in real files; use `Inches` or `Centimeters`. |
+
+`[WIF] Developers=` itself stays, with the meaning it has in practice rather than in the 1997
+text: an **optional company or developer name**, such as `LoftyFiber` (TempoWeave) or
+`Canyon Art` (WeaveIt for Windows), that tells apart programs with similar `Source Program`
+names. It is never required and never an email address. This matches the WIF 1.1 guide.
 
 ### `[CONTENTS]` becomes advisory
 

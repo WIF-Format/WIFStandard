@@ -116,6 +116,7 @@ Identifies the file as a WIF and records which program wrote it.
 Version=1.2                 ;required
 Source Program=Mac WeaveIt  ;required. The program that wrote the file.
 Source Version=1.0          ;optional. That program's version.
+Developers=Canyon Art       ;optional. The company that makes the program. Never an email.
 Date=2026-10-06             ;required
 Encoding=UTF-8              ;optional. New in 1.2.
 ```
@@ -126,8 +127,13 @@ Encoding=UTF-8              ;optional. New in 1.2.
   (`April 20, 1997`, `10/22/2016`, `Jan 1994`), so readers should still show the value as
   text when it does not parse, and never reject the file.
 
-_Do not write a `Developers` or email keyline. A WIF file travels through forums and email
-attachments, and an address in it is a privacy and spam risk._
+- **`Developers`** is optional and holds the name of the company or developer that makes the
+  program, such as `LoftyFiber` (TempoWeave) or `Canyon Art` (WeaveIt for Windows). It tells
+  apart programs whose `Source Program` names are alike. This differs from the 1997 text,
+  which made it a required email address. **Never write an email address** there: a WIF
+  file travels through forums and email attachments, and an address in it is a privacy and
+  spam risk. Readers must not require `Developers`, and should ignore an email address
+  found there.
 
 ### CONTENTS
 
@@ -573,7 +579,8 @@ writes them.
   `[WEFT THICKNESS ZOOM]`, and the `Spacing Zoom` / `Thickness Zoom` keylines. Never built.
 - **Bitmap** — `[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]`. Never built.
 - **`[TRANSLATIONS]`** and **`[DESIGN]`** — dropped in 1.1.
-- **Contact details** — `[WIF] Developers`, and `[TEXT] Address`, `EMail`, `Telephone`, `FAX`.
+- **Contact details** — an email address in `[WIF] Developers` (a company name is fine), and
+  `[TEXT] Address`, `EMail`, `Telephone`, `FAX`.
 - **Old color keylines** — `[WARP]` / `[WEFT]` `Colors`, `Palette`, `ColorMix`.
 - **`[WEAVING] Profile`**, and **`Units=Decipoints`**.
 

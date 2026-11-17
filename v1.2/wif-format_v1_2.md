@@ -64,6 +64,7 @@ A writer may omit any keyline equal to its default, or write them all.
 | `Version` | string | Required. `1.2`. A writer using no 1.2 feature may write `1.1`. Never reject on value. |
 | `Source Program` | string | Required. Name of the writing program. |
 | `Source Version` | string | Optional. Version of the writing program. |
+| `Developers` | string | Optional. Name of the company or developer that makes the writing program, to tell apart programs with similar `Source Program` names. Never an email address. *Differs from the 1997 text*, which made it a required email address. Readers must not require it. |
 | `Date` | date | Required. **(1.2)** `YYYY-MM-DD`. |
 | `Encoding` | string | **(1.2)** Optional. `UTF-8`. |
 
@@ -315,7 +316,7 @@ Valid to read; ignore silently. A 1.2 writer never emits these.
 | `[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]` | Never implemented. Suspended at 1.1. |
 | `[TRANSLATIONS]` | Suspended at 1.1. |
 | `[DESIGN]` | Dropped at 1.1. |
-| `[WIF] Developers` | Contact address. Privacy risk. |
+| An email address in `[WIF] Developers` | Personal information. Write a company name instead, or omit the keyline. |
 | `[TEXT] Address`, `EMail`, `Telephone`, `FAX` | Personal contact data. Privacy risk. |
 | `[WARP]` / `[WEFT]` `Colors`, `Palette`, `ColorMix` | Superseded by the color table. |
 | `[WARP]` / `[WEFT]` `Symbol`, `Symbol Number`, `Spacing Zoom`, `Thickness Zoom` | With the symbol and zoom sections. |
