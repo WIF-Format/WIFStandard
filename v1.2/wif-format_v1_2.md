@@ -331,7 +331,7 @@ Valid to read; ignore silently. A 1.2 writer never emits these.
   structure sections for that reason.
 - **Strict 1.1 readers.** Some refuse a file without `[CONTENTS]`. Write it if you target them.
 - **Platform file type.** Unchanged: `.wif`, UTI `org.wif-format.wif`. See
-  [Sharing the `.wif` File Type on macOS and iOS](../apple-uti-setup.md).
+  the [Developer Guide: Sharing the .wif Format on macOS and iOS](../apple/README.md).
 
 ---
 
