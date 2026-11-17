@@ -225,10 +225,10 @@ Not normative changes — ambiguities in the 1997 text, pinned to match the form
   weave. Is that enough for 2- and 3-heddle pattern work, or does a rigid-heddle draft need a
   `neutral` shed and a way to record picked-up ends?
 
+<div class="github-only" markdown="1">
+
 ---
 
-## License
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](../LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
 
-Copyright © 2026 Shannon Young. Licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), like the rest of this repository. Nothing
-here claims any right in the WIF format itself.
+</div>

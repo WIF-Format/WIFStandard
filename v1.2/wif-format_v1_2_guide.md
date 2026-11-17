@@ -597,11 +597,10 @@ writes them.
 - **Old color keylines** — `[WARP]` / `[WEFT]` `Colors`, `Palette`, `ColorMix`.
 - **`[WEAVING] Profile`**, and **`Units=Decipoints`**.
 
+<div class="github-only" markdown="1">
+
 ---
 
-## License
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](../LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
 
-Copyright © 2026 Shannon Young. Licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), like the rest of this repository.
-Nothing here claims any right in the WIF format itself; see
-[License and attribution](../README.md#license-and-attribution).
+</div>
