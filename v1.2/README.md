@@ -18,3 +18,11 @@ WIF 1.2 is WIF 1.1 with additions: a yarn table, repeat blocks, an explicit loom
 | [`rigid-heddle-plain.wif`](rigid-heddle-plain.wif) | A complete file: plain weave on a single-heddle rigid-heddle loom. |
 
 [All versions](../README.md)
+
+<div class="github-only" markdown="1">
+
+---
+
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](../LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
+
+</div>

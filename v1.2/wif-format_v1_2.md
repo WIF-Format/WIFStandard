@@ -342,7 +342,7 @@ Valid to read; ignore silently. A 1.2 writer never emits these.
 - **Example files:** [twill-color-and-weave.wif](twill-color-and-weave.wif), [rigid-heddle-plain.wif](rigid-heddle-plain.wif)
 - **WIF 1.1:** [v1.1](../v1.1/)
 - **Overview of all versions:** [README.md](../README.md)
-- **Original WIF 1.1 text (historical):** [Copyright © 1996, 1997 Ravi Nielsen](http://www.tantradharma.com/maplehill/wif/wif1-1.txt)
+- **Historical:** [Original WIF 1.1 text](http://www.tantradharma.com/maplehill/wif/wif1-1.txt)
 - **Discussion:** [PR #2](https://github.com/WIF-Format/WIFStandard/pull/2)
 
 ---
@@ -421,8 +421,10 @@ Spacing=0.0833
 4=2
 ```
 
+<div class="github-only" markdown="1">
+
 ---
 
-Copyright © 2026 Shannon Young. Licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The WIF format itself is unowned;
-see [License and attribution](../README.md#license-and-attribution).
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](../LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
+
+</div>
