@@ -1,0 +1,66 @@
+[WIF]
+Version=1.2
+Source Program=Example
+Date=2026-10-06
+Encoding=UTF-8
+
+[COLOR PALETTE]
+Entries=2
+Range=0,255
+
+[COLOR TABLE]
+1=168,0,0
+2=231,224,85
+
+[YARNS]
+1=168,0,0, Barn red, cotton, 8/2
+2=231,224,85, Gold, cotton, 8/2
+
+[WEAVING]
+Shafts=2
+Treadles=2
+Rising Shed=1
+Loom Type=Rigid Heddle
+Heddles=1
+Weave Type=Balanced
+
+[WARP]
+Threads=8
+Color=1
+Units=Inches
+Spacing=0.0833
+
+[WEFT]
+Threads=4
+Color=2
+Units=Inches
+Spacing=0.0833
+
+[THREADING]
+1=1
+2=2
+3=1
+4=2
+5=1
+6=2
+7=1
+8=2
+
+[WARP REPEATS]
+1=0,4,2
+
+[LIFTPLAN]
+1=1
+2=2
+3=1
+4=2
+
+[TIEUP]
+1=1
+2=2
+
+[TREADLING]
+1=1
+2=2
+3=1
+4=2
