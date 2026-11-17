@@ -19,3 +19,11 @@ loom type — floor loom, lift-plan loom, or rigid heddle. The JSON Schema is th
 | [`rigid-heddle-plaid.wif2`](rigid-heddle-plaid.wif2) | A complete file: a plaid on a rigid-heddle loom. |
 
 [All versions](../README.md)
+
+<div class="github-only" markdown="1">
+
+---
+
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](../LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
+
+</div>
