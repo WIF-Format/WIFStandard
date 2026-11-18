@@ -153,7 +153,9 @@ A file may carry all four.
 4=4
 ```
 
-Key is the end; value is an array of shafts. More than one shaft per end is legal but rare.
+Key is the end; value is an array of shafts. More than one shaft per end is legal but rare: it
+needs long-eyed heddles, and on a rising-shed loom the end is up if any of its shafts is
+raised. A reader that allows one shaft per end keeps the first and tells the user.
 Absent end → shaft `0`, unthreaded.
 
 **`[TIEUP]`** (with `[TREADLING]`) — Shafts tied to each treadle.

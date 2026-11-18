@@ -11,6 +11,7 @@ WIF.
 | **pick** | A single weft thread — one row of weaving. |
 | **shaft** | A frame that raises or lowers a group of ends. Also called a *harness*. |
 | **heddle** | A loop on a shaft that one end passes through. |
+| **long-eyed heddle** | A heddle with a tall eye, so the end can rise with another shaft without being held down by this one. Needed when an end is threaded on more than one shaft. |
 | **rigid heddle** | A single frame of alternating holes and slots. Ends in holes move when the heddle is raised or lowered; ends in slots stay put. |
 | **treadle** | A foot pedal on a floor loom. Pressing it moves the shafts tied to it. |
 | **threading** | Which shaft each end passes through, read across the warp. |

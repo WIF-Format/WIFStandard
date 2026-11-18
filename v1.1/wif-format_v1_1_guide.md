@@ -251,7 +251,8 @@ Which shaft each warp end passes through, read across the warp from one edge.
 ```
 
 - `1=1,5` means end 1 is threaded through heddles on **both** shaft 1 and shaft 5. This is
-  rare; WeaveIt reads a single shaft per end.
+  rare; see [Ends on more than one shaft](#ends-on-more-than-one-shaft) for what it means at
+  the loom and in a drawdown.
 - An end with no keyline is on shaft `0` — not threaded (see
   [Default values and sparse data](#default-values-and-sparse-data)).
 
@@ -551,6 +552,21 @@ current WeaveIt applications do; older versions wrote one or the other.
 `Rising Shed=1` raises the shafts named in the tie-up / lift plan; `0` lowers them, which
 flips which face of the cloth the drawdown shows. Assume rising if the keyline is missing,
 and always write it.
+
+### Ends on more than one shaft
+
+A `[THREADING]` keyline may name more than one shaft, such as `1=1,5`. At the loom this
+needs *long-eyed heddles*: their tall eye lets the end rise with one shaft without being
+held down by the other. With ordinary heddles, the two shafts pull the end in opposite
+directions, and the shed does not open cleanly. Weavers use it for double-harness work such
+as damask, which has one set of shafts for the pattern and another for the ground.
+
+- **In the drawdown,** on a rising-shed loom, the end is up on a pick if **any** of its
+  shafts is raised.
+- **Store threading as an array**, as you would treadling.
+- **If your program allows only one shaft per end,** keep the first shaft, and tell the
+  user that the drawdown may differ from the original. Never treat such an end as
+  unthreaded.
 
 ### Multi-treadling
 
