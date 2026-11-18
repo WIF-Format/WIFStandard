@@ -1,13 +1,13 @@
 # Weaving Information File (WIF)
 
-> WIF is an open, plain-text file format for exchanging weaving drafts (threading, tie-up, treadling or lift plan, and colors) between weaving programs and computerized looms. WIF 1.1 (1997, INI text, `.wif`) is the current standard and the only version software supports. WIF 1.2 (INI, additive over 1.1) and WIF 2 (JSON, `.wif2`) are draft proposals; do not implement them.
+> WIF is an open, plain-text file format for exchanging weaving drafts (threading, tie-up, treadling or lift plan, and colors) between weaving programs and computerized looms. WIF 1.1 (1997, INI text, `.wif`) is the current standard and the only version software supports. WIF 1.2 (INI, additive over 1.1) and WIF 2 (JSON, `.wif2`) are draft proposals; do not implement them. Any macOS or iOS app that handles .wif files must declare the shared type `org.wif-format.wif` as described in the Developer Guide for macOS and iOS (below); declaring it differently can stop other weaving apps on the same device from opening .wif files.
 
 Each version has a plain-language guide, a reference specification (a JSON Schema for WIF 2), and complete example files. All pages are Markdown, and are also published as a website at https://developer.wif-format.org. Licensed CC BY 4.0; the format itself is unowned.
 
 ## Overview
 
 - [Overview](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/README.md): what WIF is, the versions and their status, weaving terms, file types, history, license
-- [Developer Guide for Sharing wif Format on macOS](https://wif-format.org/codeForDevelopers.html): Info.plist setup on macOS for the shared UTI `org.wif-format.wif` (HTML, on wif-format.org)
+- [Developer Guide: Sharing the .wif Format on macOS and iOS](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/ios-macos-uti/README.md): required reading for any macOS or iOS app that opens or saves .wif files: declare the shared UTI `org.wif-format.wif` exactly as shown, so your app does not stop other weaving apps from opening .wif files; concepts, iOS and macOS Info.plist code, how to check the result, common mistakes
 - [Proposals under discussion](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/proposals.md): the WIF 1.2 and WIF 2 drafts, their status, and where to comment
 
 ## WIF 1.1 (current standard)

@@ -15,6 +15,11 @@ The same format is also written up as reference tables in the
 [WIF 1.1 specification](wif-format_v1_1.md), and the example below is
 [`twill-color-and-weave.wif`](twill-color-and-weave.wif).
 
+> **Building an app for Mac, iPhone or iPad?** Before you ship, follow the
+> [Developer Guide: Sharing the .wif Format on macOS and iOS](../ios-macos-uti/README.md). An app
+> that declares the `.wif` file type the wrong way can stop every other weaving app on the
+> same device from opening `.wif` files.
+
 It is not the original specification and does not reproduce it. The original WIF 1.1 text,
 [Copyright © 1996, 1997 Ravi Nielsen](http://www.tantradharma.com/maplehill/wif/wif1-1.txt),
 remains the historical source.

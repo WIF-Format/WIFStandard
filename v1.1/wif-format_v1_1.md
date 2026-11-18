@@ -244,7 +244,7 @@ Read only for compatibility. Never write.
 ### 4. Integration notes
 
 - **Platform file type.** On macOS and iOS, declare the shared UTI `org.wif-format.wif`. See
-  the [Developer Guide for Sharing wif Format on macOS](https://wif-format.org/codeForDevelopers.html) on wif-format.org.
+  the [Developer Guide: Sharing the .wif Format on macOS and iOS](../ios-macos-uti/README.md).
 - **Interoperability.** Files most often fail to open elsewhere because of a missing
   `[COLOR PALETTE]` / `[COLOR TABLE]`, a malformed `[CONTENTS]`, non-UTF-8 bytes, or a private
   section line beginning with `[`.

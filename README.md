@@ -22,6 +22,17 @@ a menu and search.
 - **Implementing WIF?** Read the **[WIF 1.1 guide](v1.1/wif-format_v1_1_guide.md)**, then
   the [WIF 1.1 specification](v1.1/wif-format_v1_1.md). WIF 1.1 is the current standard and
   the only version software supports.
+- **Building or updating an app for Mac, iPhone or iPad?** Read the
+  **[Developer Guide: Sharing the .wif Format on macOS and iOS](ios-macos-uti/README.md)** before you
+  ship. On Apple devices every weaving app shares the `.wif` file type, and **one app that
+  declares it the wrong way can stop every other weaving app on that device from opening
+  `.wif` files**. In short:
+  - Export the shared type **`org.wif-format.wif`**, copied exactly from the guide.
+  - Give it the rank **`Default`**, never `Owner`. No app owns WIF.
+  - **Never** claim the `.wif` extension with a type of your own.
+  - **Never** make your app the default for `.wif` in code; the weaver chooses.
+  - Check the result on a device or Mac with other weaving apps installed, as the guide
+    shows.
 - **Interested in where WIF goes next?** Two
   **[proposals are under discussion](proposals.md)**:
   [WIF 1.2](https://developer.wif-format.org/v1.2/) (comments on
@@ -92,7 +103,7 @@ These terms are used the same way in every version.
 
 On Windows a file extension is enough. Apple platforms identify file types by Uniform Type
 Identifier, so every app that reads or writes WIF should declare the same shared one — see
-**[Developer Guide for Sharing wif Format on macOS](https://wif-format.org/codeForDevelopers.html)** on wif-format.org.
+**[Developer Guide: Sharing the .wif Format on macOS and iOS](ios-macos-uti/README.md)**.
 
 ---
 
