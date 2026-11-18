@@ -59,6 +59,7 @@ A writer may omit any keyline equal to its default, or write them all.
 | `Version` | string | Required. Always `1.1`. |
 | `Source Program` | string | Required. Name of the writing program. |
 | `Source Version` | string | Optional. Version of the writing program. |
+| `Developers` | string | Optional. Name of the company or developer that makes the writing program, to tell apart programs with similar `Source Program` names. Never an email address. *Differs from the 1997 text*, which made it a required email address. Readers must not require it. |
 | `Date` | string | Required. Free text; no dependable format. Parse leniently or display as text. |
 
 **`[CONTENTS]`** — Table of contents. Required on write; advisory on read.
@@ -235,7 +236,7 @@ Read only for compatibility. Never write.
 
 | Item | Why not to write it |
 | --- | --- |
-| `[WIF]`: `Developers` | Personal information: a contact address in a shared file. Ignore on read. |
+| An email address in `[WIF]`: `Developers` | Personal information. Write a company name instead, or omit the keyline (section 1.4). Ignore an address on read. |
 | `[TEXT]`: `Address`, `EMail`, `Telephone`, `FAX` | Personal information. Ignore on read. |
 | `[WARP SPACING ZOOM]`, `[WARP THICKNESS ZOOM]`, `[WEFT SPACING ZOOM]`, `[WEFT THICKNESS ZOOM]`; `Spacing Zoom`, `Thickness Zoom` | Never implemented. |
 | `[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]` | Never implemented. Suspended at 1.1. |

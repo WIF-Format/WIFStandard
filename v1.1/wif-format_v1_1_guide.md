@@ -110,15 +110,24 @@ Identifies the file as a WIF and records which program wrote it.
 Version=1.1                 ;required. Always 1.1.
 Source Program=Mac WeaveIt  ;required. The program that wrote the file.
 Source Version=1.0          ;optional. That program's version.
+Developers=Canyon Art       ;optional. The company that makes the program. Never an email.
 Date=October 6, 2016        ;required. Free text — see the note below.
 ```
 
-_The 1997 text also lists a `Developers` keyline holding a contact email address, and
-marks it required. **Do not write it.** A WIF file travels through forums and email
-attachments; an address embedded in one is a privacy and spam risk to whoever put it
-there, and no reader needs it. Omit the keyline; if some strict reader forces the issue,
-use a shared project address, never a person's. Readers should ignore it. `Date` has no
-dependable format — see [Notes for implementers](#the-date-keyline-is-free-text)._
+**`Developers` differs from the 1997 text.** The 1997 text describes `Developers` as a
+contact email address and makes it required. In practice, programs write the name of the
+company or developer that makes them: TempoWeave writes `Developers=LoftyFiber`, and WeaveIt
+for Windows writes `Developers=Canyon Art`. This tells apart programs whose `Source Program`
+names are alike. This guide follows that practice:
+
+- `Developers` is **optional**. A reader must not require it.
+- When present, it holds a **company or developer name**.
+- It is **never an email address**. A WIF file travels through forums and email
+  attachments; an address in one is a privacy and spam risk to whoever put it there, and no
+  reader needs it. A reader should ignore an email address found there.
+
+`Date` has no dependable format — see
+[Notes for implementers](#the-date-keyline-is-free-text).
 
 ### CONTENTS
 
@@ -592,7 +601,7 @@ Each deprecated part follows one of two rules:
 
 | Rule | Applies to | Why |
 | --- | --- | --- |
-| **[Do not write](#do-not-write)** | Contact keylines, zoom, bitmap, translations, design, the old color keylines, `Profile`, `Units=Decipoints` | Each one exposes personal information, was never implemented, has been replaced, or means different things to different programs. The reason for each is below. |
+| **[Do not write](#do-not-write)** | Email addresses and other contact details, zoom, bitmap, translations, design, the old color keylines, `Profile`, `Units=Decipoints` | Each one exposes personal information, was never implemented, has been replaced, or means different things to different programs. The reason for each is below. |
 | **[Do not depend on other programs keeping it](#do-not-depend-on-other-programs-keeping-it)** | Symbols, and [private sections](#private-sections) | Writing them is allowed. But most programs skip them, and drop them when they save the file again. |
 
 ### Do not write
@@ -602,7 +611,7 @@ writer should never write them, for the reason given:
 
 | Part | Why not to write it |
 | --- | --- |
-| `[WIF]`: `Developers=`, or any email keyline | **Personal information.** A WIF file travels through forums and email; an address in it is a privacy and spam risk to whoever put it there, and no reader needs it. Ignore it when reading. |
+| An email address in `[WIF]` `Developers=`, or any other email keyline | **Personal information.** A WIF file travels through forums and email; an address in it is a privacy and spam risk to whoever put it there, and no reader needs it. Ignore it when reading. `Developers` itself may hold a company name; see [WIF](#wif). |
 | `[TEXT]`: `Address=`, `EMail=`, `Telephone=`, `FAX=` | **Personal information**, for the same reason. Ignore it when reading. |
 | `[WARP SPACING ZOOM]`, `[WARP THICKNESS ZOOM]`, `[WEFT SPACING ZOOM]`, `[WEFT THICKNESS ZOOM]`, and the `Spacing Zoom` / `Thickness Zoom` keylines in `[WARP]` / `[WEFT]` | **Never implemented.** A magnification factor for variable-spacing drafts that no current program uses, so no reader would apply it. |
 | `[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]` | **Never implemented.** Reserved in 1996; support was suspended at version 1.1. |
