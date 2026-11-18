@@ -1,21 +1,34 @@
 # Proposals under discussion
 
-> **Nothing here is decided, and no software should implement these proposals.** Read and
-> write [WIF 1.1](v1.1/README.md), the current standard.
+> **Nothing here is decided, and no weaving program should use these proposals yet.** Read
+> and write [WIF 1.1](v1.1/README.md), the current standard.
 
-Two ways forward from WIF 1.1 are open for discussion. Each one has a guide, a reference
-specification, a proposal page explaining the reasons for each change, and example files.
-Comments go on the proposal's pull request.
+Weaving software developers agree that WIF could be improved, but they have different ideas
+about how. Two ideas for the next version are written up here so that everyone can read them
+and comment. Each one has a guide, a reference specification, a page explaining the reasons
+for each change, and example files.
 
-| Proposal | Format | What it does | Read it | Comment |
-| --- | --- | --- | --- | --- |
-| **WIF 1.2** | INI text, `.wif` | Keeps the 1.1 format and standardizes the extensions that already ship in the field. Formally deprecates the parts no current program implements. Every 1.1 file is a valid 1.2 file. | [WIF 1.2](https://developer.wif-format.org/v1.2/) | [PR #2](https://github.com/WIF-Format/WIFStandard/pull/2) |
-| **WIF 2** | JSON, `.wif2` | A larger rewrite to JSON, with a published schema and a normalized data model. | [WIF 2](https://developer.wif-format.org/v2/) | [PR #1](https://github.com/WIF-Format/WIFStandard/pull/1) |
+| Proposal | What it does | Read it | Discuss it |
+| --- | --- | --- | --- |
+| **WIF 1.2** | A small update. Files stay plain text with the `.wif` extension, like WIF 1.1. It adds the extra information that weaving programs already write today, such as a yarn list and repeats, and marks as deprecated the parts no current program uses. Every WIF 1.1 file is also a valid WIF 1.2 file. | [WIF 1.2](https://developer.wif-format.org/v1.2/) | [Pull request 2](https://github.com/WIF-Format/WIFStandard/pull/2) |
+| **WIF 2** | A larger redesign. Files use JSON, a common text format that programs read easily, with a new `.wif2` extension. A formal description of the file (a "schema") lets programs check that a file is correct. | [WIF 2](https://developer.wif-format.org/v2/) | [Pull request 1](https://github.com/WIF-Format/WIFStandard/pull/1) |
 
-The proposal files are kept on their own branches,
-[`wif1.2-proposal`](https://github.com/WIF-Format/WIFStandard/tree/wif1.2-proposal/v1.2) and
-[`wif2-proposal`](https://github.com/WIF-Format/WIFStandard/tree/wif2-proposal/v2), and the
-website is rebuilt whenever either branch changes.
+## How to comment
+
+Each proposal is discussed on GitHub, the website where these documents are kept. A *pull
+request* is a GitHub page that shows a proposed change to the documents, with a place to
+discuss it before anyone accepts it.
+
+To comment on a proposal:
+
+1. Open its pull request from the table above.
+2. Sign in to GitHub. An account is free.
+3. Write your comment in the box at the bottom of the page.
+
+If you would rather not use GitHub, email your comments to
+[info@wif-format.org](mailto:info@wif-format.org).
+
+The proposal pages on this website always show the latest version of each proposal.
 
 <div class="github-only" markdown="1">
 

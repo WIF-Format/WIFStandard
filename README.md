@@ -33,12 +33,8 @@ a menu and search.
   - **Never** make your app the default for `.wif` in code; the weaver chooses.
   - Check the result on a device or Mac with other weaving apps installed, as the guide
     shows.
-- **Interested in where WIF goes next?** Two
-  **[proposals are under discussion](proposals.md)**:
-  [WIF 1.2](https://developer.wif-format.org/v1.2/) (comments on
-  [PR #2](https://github.com/WIF-Format/WIFStandard/pull/2)) and
-  [WIF 2](https://developer.wif-format.org/v2/) (comments on
-  [PR #1](https://github.com/WIF-Format/WIFStandard/pull/1)). Do not implement either one yet.
+- **Interested in where WIF goes next?** Ideas for future versions are on a separate page,
+  **[Proposals under discussion](proposals.md)**. Nothing in them is decided yet.
 - **An AI agent?** Start from [`llms.txt`](llms.txt).
 
 ---
@@ -47,18 +43,12 @@ a menu and search.
 
 | Version | Status | Format | Guide | Specification | Examples |
 | --- | --- | --- | --- | --- | --- |
-| **[1.1](v1.1/)** | Current standard (1997) | INI text, `.wif` | [Guide](v1.1/wif-format_v1_1_guide.md) | [Spec](v1.1/wif-format_v1_1.md) | [`.wif`](v1.1/twill-color-and-weave.wif) |
-| **[1.2](https://developer.wif-format.org/v1.2/)** | Draft proposal | INI text, `.wif` | [Guide](https://developer.wif-format.org/v1.2/wif-format_v1_2_guide.html) | [Spec](https://developer.wif-format.org/v1.2/wif-format_v1_2.html) | [folder](https://github.com/WIF-Format/WIFStandard/tree/wif1.2-proposal/v1.2) |
-| **[2](https://developer.wif-format.org/v2/)** | Draft proposal | JSON, `.wif2` | [Guide](https://developer.wif-format.org/v2/wif-format_v2_guide.html) | [Schema](https://developer.wif-format.org/v2/wif2.schema.json) | [folder](https://github.com/WIF-Format/WIFStandard/tree/wif2-proposal/v2) |
+| **[1.1](v1.1/)** | Current standard (1997) | Plain text, `.wif` | [Guide](v1.1/wif-format_v1_1_guide.md) | [Specification](v1.1/wif-format_v1_1.md) | [`.wif`](v1.1/twill-color-and-weave.wif) |
 
-**Which one should I use?** Read and write **WIF 1.1**. It is the only version software
-supports today. The two proposals are open for discussion and nothing in them is decided:
-
-- **WIF 1.2** stays in the INI text format, standardizes the extensions that already ship in
-  the field, and formally deprecates the parts nothing implements. Every 1.1 file is a valid 1.2
-  file. Comments go on [PR #2](https://github.com/WIF-Format/WIFStandard/pull/2).
-- **WIF 2** is a larger rewrite to JSON, with a published schema and a normalized data model.
-  Comments go on [PR #1](https://github.com/WIF-Format/WIFStandard/pull/1).
+**Which version should I use?** Read and write **WIF 1.1**. It is the only version weaving
+programs support today. Two ideas for a future version, WIF 1.2 and WIF 2, are open for
+discussion on the [Proposals under discussion](proposals.md) page. Nothing in them is decided,
+so no program should use them yet.
 
 Each version folder holds the same kinds of file:
 
