@@ -394,8 +394,9 @@ Room for a program to store data that WIF does not model, without breaking other
 
 **In the file** — the section name is `[PRIVATE <SourceID> <SectionName>]`, where
 `<SourceID>` is a short tag unique to the program that wrote it. A program that does not
-recognize a private section skips it. **No line inside a private section may begin with
-`[`** — that is how a reader finds where the next real section starts.
+recognize a private section skips it, so the section is lost if that program saves the file
+again. **No line inside a private section may begin with `[`** — that is how a reader finds
+where the next real section starts.
 
 ```
 [PRIVATE WEAVEIT AWESOME]
@@ -582,21 +583,52 @@ non-UTF-8 bytes; or a private-section line that begins with `[`.
 
 ## Obsolete and unsupported
 
-This guide limits itself to what the [Canyon Art WeaveIt](https://weaveit.com/) applications read and write. Their author was
-one of the original WIF 1.1 developers, so where those applications ignore a part of the
-format, this guide treats that part as **effectively deprecated** and describes it only
-briefly here.
+This guide limits itself to what the [Canyon Art WeaveIt](https://weaveit.com/) applications
+read and write. Their author was one of the original WIF 1.1 developers, so where those
+applications ignore a part of the format, this guide treats that part as deprecated and
+describes it only briefly here.
 
-The following are part of the historical format but are ignored by current weaving
-software, WeaveIt included. Read them only for compatibility; never write them.
+Each deprecated part follows one of two rules:
 
-### Symbols
+| Rule | Applies to | Why |
+| --- | --- | --- |
+| **[Do not write](#do-not-write)** | Contact keylines, zoom, bitmap, translations, design, the old color keylines, `Profile`, `Units=Decipoints` | Each one exposes personal information, was never implemented, has been replaced, or means different things to different programs. The reason for each is below. |
+| **[Do not depend on other programs keeping it](#do-not-depend-on-other-programs-keeping-it)** | Symbols, and [private sections](#private-sections) | Writing them is allowed. But most programs skip them, and drop them when they save the file again. |
+
+### Do not write
+
+A reader may come across these in older files and can read them for compatibility. A
+writer should never write them, for the reason given:
+
+| Part | Why not to write it |
+| --- | --- |
+| `[WIF]`: `Developers=`, or any email keyline | **Personal information.** A WIF file travels through forums and email; an address in it is a privacy and spam risk to whoever put it there, and no reader needs it. Ignore it when reading. |
+| `[TEXT]`: `Address=`, `EMail=`, `Telephone=`, `FAX=` | **Personal information**, for the same reason. Ignore it when reading. |
+| `[WARP SPACING ZOOM]`, `[WARP THICKNESS ZOOM]`, `[WEFT SPACING ZOOM]`, `[WEFT THICKNESS ZOOM]`, and the `Spacing Zoom` / `Thickness Zoom` keylines in `[WARP]` / `[WEFT]` | **Never implemented.** A magnification factor for variable-spacing drafts that no current program uses, so no reader would apply it. |
+| `[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]` | **Never implemented.** Reserved in 1996; support was suspended at version 1.1. |
+| `[TRANSLATIONS]` | **Never implemented.** Meant for translating key names; suspended at version 1.1. |
+| `[DESIGN]` | **Removed** at version 1.1. |
+| `[WARP]` / `[WEFT]`: `Colors=`, `Palette=`, `ColorMix=` | **Replaced** by `[COLOR PALETTE]` and `[COLOR TABLE]`. Writing both risks two different colors for the same thread. |
+| `[WEAVING]`: `Profile=` | **Obsolete.** No current program uses it. |
+| `[WARP]` / `[WEFT]`: `Units=Decipoints` | **Programs disagree on what it means.** Some read it as inches; others convert it at 720 decipoints to the inch. Write `Inches` or `Centimeters`. When reading, treat it as `Inches`. |
+
+### Do not depend on other programs keeping it
+
+These are still part of WIF 1.1, and writing them is allowed. But most weaving programs,
+WeaveIt included, skip them, and a program that skips a section also drops it when it saves
+the file again. Write them if your program uses them, but don't put anything there that the
+draft can't do without.
+
+- **[Private sections](#private-sections)**, which hold one program's own data.
+- **Symbols**, below.
+
+#### Symbols
 
 `[WARP SYMBOL PALETTE]`, `[WEFT SYMBOL PALETTE]`, `[WARP SYMBOL TABLE]`,
 `[WEFT SYMBOL TABLE]`, `[WARP SYMBOLS]`, `[WEFT SYMBOLS]`.
 
-These let a draft be drawn with a letter or mark per yarn instead of a color. Modern
-programs, including WeaveIt, do not use them. If you must read them:
+These let a draft be drawn with a letter or mark per yarn instead of a color. Most
+programs, including the WeaveIt applications, do not use them. If you read or write them:
 
 - `[* SYMBOL PALETTE]` has `Entries=n`, the size of the symbol table.
 - `[* SYMBOL TABLE]` maps `index` → a **WIF Symbol** value.
@@ -612,34 +644,6 @@ A **WIF Symbol** value is one of:
 | `#` + code | `#219` | character code 219 |
 
 A space must be written `' '` or `#32`; a `#` must be written `'#'` or `#35`.
-
-### Zoom
-
-`[WARP SPACING ZOOM]`, `[WARP THICKNESS ZOOM]`, `[WEFT SPACING ZOOM]`,
-`[WEFT THICKNESS ZOOM]`, and the `Spacing Zoom` / `Thickness Zoom` keylines in `[WARP]` /
-`[WEFT]`. A magnification factor for variable-spacing drafts. Not implemented in current
-software.
-
-### Bitmap
-
-`[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]`. Reserved in 1996, never
-implemented; support was suspended at version 1.1.
-
-### Translations
-
-`[TRANSLATIONS]`. Intended for localizing key names. Suspended at version 1.1.
-
-### Obsolete keylines
-
-Silently ignore these; they are left in the format only for completeness:
-
-- `[WIF]`: `Developers=` and any email keyline. Deprecated here on privacy grounds — a
-  shared file should not carry a contact address. Ignore on read; never write it.
-- `[TEXT]`: `Address=`, `EMail=`, `Telephone=`, `FAX=` — same reason.
-- `[WARP]` / `[WEFT]`: `Colors=`, `Palette=`, `ColorMix=` (superseded by the color table).
-- `[WEAVING]`: `Profile=`.
-- `[WARP]` / `[WEFT]`: `Units=Decipoints`. Treat it as `Inches`, as WeaveIt does.
-- The `[DESIGN]` section (dropped at version 1.1).
 
 <div class="github-only" markdown="1">
 

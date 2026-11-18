@@ -215,7 +215,7 @@ and `[TREADLING]`.
 | *keylines* | — | Any content. No line may begin with `[`. |
 
 A reader skips any private section it does not recognize, resuming at the next line that
-begins with `[`.
+begins with `[`. Other programs therefore do not keep it when they save the file.
 
 ```ini
 [PRIVATE WEAVEIT AWESOME]
@@ -226,20 +226,34 @@ Sparkles=1
 
 ### 3. Deprecated
 
+Each deprecated part follows one of two rules. See the
+[guide](wif-format_v1_1_guide.md#obsolete-and-unsupported) for details.
+
+#### 3.1 Do not write
+
 Read only for compatibility. Never write.
+
+| Item | Why not to write it |
+| --- | --- |
+| `[WIF]`: `Developers` | Personal information: a contact address in a shared file. Ignore on read. |
+| `[TEXT]`: `Address`, `EMail`, `Telephone`, `FAX` | Personal information. Ignore on read. |
+| `[WARP SPACING ZOOM]`, `[WARP THICKNESS ZOOM]`, `[WEFT SPACING ZOOM]`, `[WEFT THICKNESS ZOOM]`; `Spacing Zoom`, `Thickness Zoom` | Never implemented. |
+| `[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]` | Never implemented. Suspended at 1.1. |
+| `[TRANSLATIONS]` | Never implemented. Suspended at 1.1. |
+| `[DESIGN]` | Removed at 1.1. |
+| `[WARP]` / `[WEFT]`: `Colors`, `Palette`, `ColorMix` | Replaced by the color table; writing both can give conflicting colors. |
+| `[WEAVING]`: `Profile` | Obsolete. |
+| `[WARP]` / `[WEFT]`: `Units=Decipoints` | Programs disagree: some read inches, some convert at 720 per inch. Write `Inches` or `Centimeters`; treat as `Inches` on read. |
+
+#### 3.2 Do not depend on other programs keeping it
+
+Optional; writing them is allowed. Most current software skips them, and drops them when it
+saves the file again. Do not rely on them for data the draft needs.
 
 | Item | Notes |
 | --- | --- |
-| `[WARP SYMBOL PALETTE]`, `[WEFT SYMBOL PALETTE]`, `[WARP SYMBOL TABLE]`, `[WEFT SYMBOL TABLE]`, `[WARP SYMBOLS]`, `[WEFT SYMBOLS]` | Symbols. Unused by current software. See the [guide](wif-format_v1_1_guide.md#symbols) for value forms. |
-| `[WARP SPACING ZOOM]`, `[WARP THICKNESS ZOOM]`, `[WEFT SPACING ZOOM]`, `[WEFT THICKNESS ZOOM]`; `Spacing Zoom`, `Thickness Zoom` | Zoom. Not implemented. |
-| `[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]` | Never implemented. Suspended at 1.1. |
-| `[TRANSLATIONS]` | Suspended at 1.1. |
-| `[DESIGN]` | Dropped at 1.1. |
-| `[WIF]`: `Developers` | Contact address. Privacy risk; ignore. |
-| `[TEXT]`: `Address`, `EMail`, `Telephone`, `FAX` | Personal contact data. Privacy risk; ignore. |
-| `[WARP]` / `[WEFT]`: `Colors`, `Palette`, `ColorMix` | Superseded by the color table. |
-| `[WEAVING]`: `Profile` | Obsolete. |
-| `[WARP]` / `[WEFT]`: `Units=Decipoints` | Treat as `Inches`. |
+| `[PRIVATE <SourceID> <SectionName>]` | One program's own data. See section 2. |
+| `[WARP SYMBOL PALETTE]`, `[WEFT SYMBOL PALETTE]`, `[WARP SYMBOL TABLE]`, `[WEFT SYMBOL TABLE]`, `[WARP SYMBOLS]`, `[WEFT SYMBOLS]` | Symbols. See the [guide](wif-format_v1_1_guide.md#symbols) for value forms. |
 
 ---
 
