@@ -12,3 +12,11 @@ you want to understand the format; use the specification when you are writing co
 | [`twill-color-and-weave.wif`](twill-color-and-weave.wif) | A complete file: a 2-2 twill on 4 shafts in alternating dark and light. |
 
 [All versions](../README.md)
+
+<div class="github-only" markdown="1">
+
+---
+
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](../LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
+
+</div>

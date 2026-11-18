@@ -16,3 +16,11 @@ The proposal files are kept on their own branches,
 [`wif1.2-proposal`](https://github.com/WIF-Format/WIFStandard/tree/wif1.2-proposal/v1.2) and
 [`wif2-proposal`](https://github.com/WIF-Format/WIFStandard/tree/wif2-proposal/v2), and the
 website is rebuilt whenever either branch changes.
+
+<div class="github-only" markdown="1">
+
+---
+
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
+
+</div>

@@ -122,9 +122,9 @@ included Bob Keates (Fiberworks), Rob Sinkler (Swiftweave), Dana Cartwright (Wea
 Bjørn Myhre (WeavePoint), Jane Eisenstein, Sally Breckenridge (WeaveIt), Mark Kloosterman
 and Dini Cameron (ProWeave), Mitch Eatough, and Peter Straus (AVL).
 
-The format has not changed since version 1.1 in 1997. The original WIF 1.1 text,
-[Copyright © 1996, 1997 Ravi Nielsen](http://www.tantradharma.com/maplehill/wif/wif1-1.txt),
-remains the historical source; nothing on this site reproduces it.
+The format has not changed since version 1.1 in 1997. The
+[original WIF 1.1 text](http://www.tantradharma.com/maplehill/wif/wif1-1.txt) remains the
+historical source; nothing on this site reproduces it.
 
 More about the format and the software that supports it: [wif-format.org](https://wif-format.org).
 
@@ -139,8 +139,16 @@ claims any right in the format itself, and no one owns it; it is a shared standa
 **These documents** are independent, plain-language descriptions of that format. They do not
 copy or adapt the original specification.
 
-Copyright © 2026 Shannon Young. Licensed under the
+They are licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)
 (CC BY 4.0). You are free to copy, translate, adapt, and redistribute them, for any purpose
 including commercially, as long as you give appropriate credit and indicate any changes.
 See [`LICENSE`](LICENSE).
+
+<div class="github-only" markdown="1">
+
+---
+
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
+
+</div>

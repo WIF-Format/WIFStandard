@@ -20,10 +20,6 @@ The same format is also written up as reference tables in the
 > that declares the `.wif` file type the wrong way can stop every other weaving app on the
 > same device from opening `.wif` files.
 
-It is not the original specification and does not reproduce it. The original WIF 1.1 text,
-[Copyright © 1996, 1997 Ravi Nielsen](http://www.tantradharma.com/maplehill/wif/wif1-1.txt),
-remains the historical source.
-
 ### Scope
 
 This guide limits itself to what the [Canyon Art WeaveIt](https://weaveit.com/) applications read and write. Their author was
@@ -635,11 +631,10 @@ Silently ignore these; they are left in the format only for completeness:
 - `[WEAVING]`: `Profile=`.
 - The `[DESIGN]` section (dropped at version 1.1).
 
+<div class="github-only" markdown="1">
+
 ---
 
-## License
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](../LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
 
-Copyright © 2026 Shannon Young. Licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See
-[License and attribution](../README.md#license-and-attribution) — this guide does not copy or
-adapt the original specification, and nothing here claims any right in the format itself.
+</div>
