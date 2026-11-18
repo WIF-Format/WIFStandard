@@ -22,12 +22,19 @@ a menu and search.
 - **Implementing WIF?** Read the **[WIF 1.1 guide](v1.1/wif-format_v1_1_guide.md)**, then
   the [WIF 1.1 specification](v1.1/wif-format_v1_1.md). WIF 1.1 is the current standard and
   the only version software supports.
-- **Interested in where WIF goes next?** Two
-  **[proposals are under discussion](proposals.md)**:
-  [WIF 1.2](https://developer.wif-format.org/v1.2/) (comments on
-  [PR #2](https://github.com/WIF-Format/WIFStandard/pull/2)) and
-  [WIF 2](https://developer.wif-format.org/v2/) (comments on
-  [PR #1](https://github.com/WIF-Format/WIFStandard/pull/1)). Do not implement either one yet.
+- **Building or updating an app for Mac, iPhone or iPad?** Read the
+  **[Developer Guide: Sharing the .wif Format on macOS and iOS](ios-macos-uti/README.md)** before you
+  ship. On Apple devices every weaving app shares the `.wif` file type, and **one app that
+  declares it the wrong way can stop every other weaving app on that device from opening
+  `.wif` files**. In short:
+  - Export the shared type **`org.wif-format.wif`**, copied exactly from the guide.
+  - Give it the rank **`Default`**, never `Owner`. No app owns WIF.
+  - **Never** claim the `.wif` extension with a type of your own.
+  - **Never** make your app the default for `.wif` in code; the weaver chooses.
+  - Check the result on a device or Mac with other weaving apps installed, as the guide
+    shows.
+- **Interested in where WIF goes next?** Ideas for future versions are on a separate page,
+  **[Proposals under discussion](proposals.md)**. Nothing in them is decided yet.
 - **An AI agent?** Start from [`llms.txt`](llms.txt).
 
 ---
@@ -36,18 +43,12 @@ a menu and search.
 
 | Version | Status | Format | Guide | Specification | Examples |
 | --- | --- | --- | --- | --- | --- |
-| **[1.1](v1.1/)** | Current standard (1997) | INI text, `.wif` | [Guide](v1.1/wif-format_v1_1_guide.md) | [Spec](v1.1/wif-format_v1_1.md) | [`.wif`](v1.1/twill-color-and-weave.wif) |
-| **[1.2](https://developer.wif-format.org/v1.2/)** | Draft proposal | INI text, `.wif` | [Guide](https://developer.wif-format.org/v1.2/wif-format_v1_2_guide.html) | [Spec](https://developer.wif-format.org/v1.2/wif-format_v1_2.html) | [folder](https://github.com/WIF-Format/WIFStandard/tree/wif1.2-proposal/v1.2) |
-| **[2](https://developer.wif-format.org/v2/)** | Draft proposal | JSON, `.wif2` | [Guide](https://developer.wif-format.org/v2/wif-format_v2_guide.html) | [Schema](https://developer.wif-format.org/v2/wif2.schema.json) | [folder](https://github.com/WIF-Format/WIFStandard/tree/wif2-proposal/v2) |
+| **[1.1](v1.1/)** | Current standard (1997) | Plain text, `.wif` | [Guide](v1.1/wif-format_v1_1_guide.md) | [Specification](v1.1/wif-format_v1_1.md) | [`.wif`](v1.1/twill-color-and-weave.wif) |
 
-**Which one should I use?** Read and write **WIF 1.1**. It is the only version software
-supports today. The two proposals are open for discussion and nothing in them is decided:
-
-- **WIF 1.2** stays in the INI text format, standardizes the extensions that already ship in
-  the field, and formally deprecates the parts nothing implements. Every 1.1 file is a valid 1.2
-  file. Comments go on [PR #2](https://github.com/WIF-Format/WIFStandard/pull/2).
-- **WIF 2** is a larger rewrite to JSON, with a published schema and a normalized data model.
-  Comments go on [PR #1](https://github.com/WIF-Format/WIFStandard/pull/1).
+**Which version should I use?** Read and write **WIF 1.1**. It is the only version weaving
+programs support today. Two ideas for a future version, WIF 1.2 and WIF 2, are open for
+discussion on the [Proposals under discussion](proposals.md) page. Nothing in them is decided,
+so no program should use them yet.
 
 Each version folder holds the same kinds of file:
 
@@ -63,23 +64,8 @@ Each version folder holds the same kinds of file:
 
 ## Weaving terms
 
-These terms are used the same way in every version.
-
-| Term | Meaning |
-| --- | --- |
-| **warp** | The threads held under tension on the loom, running the length of the cloth. |
-| **weft** | The threads carried across the warp, one row at a time. |
-| **end** | A single warp thread. |
-| **pick** | A single weft thread — one row of weaving. |
-| **shaft** | A frame that raises or lowers a group of ends. Also called a *harness*. |
-| **treadle** | A foot pedal on a floor loom. Pressing it moves the shafts tied to it. |
-| **threading** | Which shaft each end passes through, read across the warp. |
-| **tie-up** | Which shafts each treadle is connected to. |
-| **treadling** | The order in which the treadles are pressed, one entry per pick. |
-| **lift plan** | The shafts raised for each pick, given directly — used instead of a tie-up and treadling. |
-| **rising / sinking shed** | Whether the loom raises the selected shafts (jack loom) or lowers them (countermarch, counterbalance). |
-| **sett** | How closely the ends are spaced, usually in ends per inch (EPI). Picks per inch (PPI) is the weft equivalent. |
-| **drawdown** | The picture of the finished cloth produced by combining threading, tie-up / lift plan, and treadling. |
+Weaving words used on this site, such as *warp*, *end*, *shaft* and *tie-up*, are explained on
+the [Weaving terms](glossary.md) page.
 
 ---
 
@@ -92,7 +78,7 @@ These terms are used the same way in every version.
 
 On Windows a file extension is enough. Apple platforms identify file types by Uniform Type
 Identifier, so every app that reads or writes WIF should declare the same shared one — see
-**[Developer Guide for Sharing wif Format on macOS](https://wif-format.org/codeForDevelopers.html)** on wif-format.org.
+**[Developer Guide: Sharing the .wif Format on macOS and iOS](ios-macos-uti/README.md)**.
 
 ---
 
@@ -111,9 +97,9 @@ included Bob Keates (Fiberworks), Rob Sinkler (Swiftweave), Dana Cartwright (Wea
 Bjørn Myhre (WeavePoint), Jane Eisenstein, Sally Breckenridge (WeaveIt), Mark Kloosterman
 and Dini Cameron (ProWeave), Mitch Eatough, and Peter Straus (AVL).
 
-The format has not changed since version 1.1 in 1997. The original WIF 1.1 text,
-[Copyright © 1996, 1997 Ravi Nielsen](http://www.tantradharma.com/maplehill/wif/wif1-1.txt),
-remains the historical source; nothing on this site reproduces it.
+The format has not changed since version 1.1 in 1997. The
+[original WIF 1.1 text](http://www.tantradharma.com/maplehill/wif/wif1-1.txt) remains the
+historical source; nothing on this site reproduces it.
 
 More about the format and the software that supports it: [wif-format.org](https://wif-format.org).
 
@@ -128,8 +114,16 @@ claims any right in the format itself, and no one owns it; it is a shared standa
 **These documents** are independent, plain-language descriptions of that format. They do not
 copy or adapt the original specification.
 
-Copyright © 2026 Shannon Young. Licensed under the
+They are licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)
 (CC BY 4.0). You are free to copy, translate, adapt, and redistribute them, for any purpose
 including commercially, as long as you give appropriate credit and indicate any changes.
 See [`LICENSE`](LICENSE).
+
+<div class="github-only" markdown="1">
+
+---
+
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
+
+</div>

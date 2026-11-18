@@ -2,8 +2,9 @@
 
 WIF 1.1 is the current WIF format, unchanged since 1997. It is a plain-text format, based
 on the [INI file](https://en.wikipedia.org/wiki/INI_file) convention, and it was designed
-to be read by a person as easily as by a program. For the format's history and the other
-versions, see the [overview](../README.md).
+to be read by a person as easily as by a program. For the format's history, see the
+[overview](../README.md); ideas for future versions are on
+[Proposals under discussion](../proposals.md).
 
 This guide is a plain-language description of WIF 1.1 as it is actually used today,
 written for two readers at once: a **weaver**, who knows what a threading or a tie-up is
@@ -15,48 +16,24 @@ The same format is also written up as reference tables in the
 [WIF 1.1 specification](wif-format_v1_1.md), and the example below is
 [`twill-color-and-weave.wif`](twill-color-and-weave.wif).
 
-It is not the original specification and does not reproduce it. The original WIF 1.1 text,
-[Copyright © 1996, 1997 Ravi Nielsen](http://www.tantradharma.com/maplehill/wif/wif1-1.txt),
-remains the historical source.
-
-### Scope
-
-This guide limits itself to what the [Canyon Art WeaveIt](https://weaveit.com/) applications read and write. Their author was
-one of the original WIF 1.1 developers, so where those applications ignore a part of the
-format, this guide treats that part as **effectively deprecated** and describes it only
-briefly, under [Obsolete and unsupported](#obsolete-and-unsupported).
+> **Building an app for Mac, iPhone or iPad?** Before you ship, follow the
+> [Developer Guide: Sharing the .wif Format on macOS and iOS](../ios-macos-uti/README.md). An app
+> that declares the `.wif` file type the wrong way can stop every other weaving app on the
+> same device from opening `.wif` files.
 
 ---
 
 ## Terminology
 
-### At the loom
-
-| Term | Meaning |
-| --- | --- |
-| **warp** | The threads held under tension on the loom, running the length of the cloth. |
-| **weft** | The threads carried across the warp, one row at a time. |
-| **end** | A single warp thread. |
-| **pick** | A single weft thread — one row of weaving. |
-| **shaft** | A frame that raises or lowers a group of ends. Also called a *harness*. |
-| **heddle** | A loop on a shaft that one end passes through. |
-| **treadle** | A foot pedal on a floor loom. Pressing it moves the shafts tied to it. |
-| **threading** | Which shaft each end passes through, read across the warp. |
-| **tie-up** | Which shafts each treadle is connected to. |
-| **treadling** | The order in which the treadles are pressed, one entry per pick. |
-| **lift plan** | The shafts raised for each pick, given directly — used instead of a tie-up and treadling. |
-| **rising / sinking shed** | Whether the loom raises the selected shafts (jack / rising shed) or lowers them (countermarch, counterbalance / sinking shed). |
-| **sett** | How closely the ends are spaced, usually in ends per inch (EPI). Picks per inch (PPI) is the weft equivalent. |
-| **drawdown** | The picture of the finished cloth produced by combining threading, tie-up / lift plan, and treadling. |
-
-### In the file
+For weaving words such as *warp*, *end*, *shaft* and *tie-up*, see
+[Weaving terms](../glossary.md). This guide also uses these words for the parts of the file:
 
 | Term | Meaning |
 | --- | --- |
 | **section** | A named block, written `[SECTION NAME]`, containing keylines. |
 | **keyline** | One `Key=Value` line inside a section. |
 | **map** | A section whose keys are either integers (`1`, `2`, `3`, …) or names. WIF sections are all maps. |
-| **array** | A comma-separated list of values in a single keyline, e.g. `1,3,5`. |
+| **array** | A comma-separated list of values in a single keyline, for example `1,3,5`. |
 
 ---
 
@@ -65,9 +42,9 @@ briefly, under [Obsolete and unsupported](#obsolete-and-unsupported).
 | Type | Notes |
 | --- | --- |
 | **Integer** | A whole number. Treat it as 32-bit. |
-| **Real** | A decimal number, e.g. `0.05` or `24`. The 1997 text calls this *real*; some call it *double*. |
+| **Real** | A decimal number, with a period as the decimal point, for example `0.05` or `24`. The 1997 text calls this *real*; some call it *double*. |
 | **String** | Text. The 1997 text says ASCII; in practice see [Text encoding](#text-encoding). |
-| **Boolean** | True is any of `true`, `on`, `yes`, `1`; false is any of `false`, `off`, `no`, `0`. An absent optional boolean is false. |
+| **Boolean** | True is any of `true`, `on`, `yes`, `1`; false is any of `false`, `off`, `no`, `0`. An absent optional boolean is false, except `Rising Shed` (see [WEAVING](#weaving)). |
 | **Array** | A comma-separated list of one of the above in a single keyline. An empty list and an omitted keyline mean the same thing. |
 
 ---
@@ -94,6 +71,7 @@ Key=Value
 - **Duplicate keys.** Writing the same key twice in one section is an error. A reader may
   keep the first or the last; it should not crash.
 - **Line endings.** Files use CRLF or LF, and sometimes both in one file. Accept any.
+- **Empty sections.** A section with no keylines is treated as absent.
 
 ### Default values and sparse data
 
@@ -132,22 +110,32 @@ Identifies the file as a WIF and records which program wrote it.
 Version=1.1                 ;required. Always 1.1.
 Source Program=Mac WeaveIt  ;required. The program that wrote the file.
 Source Version=1.0          ;optional. That program's version.
+Developers=Canyon Art       ;optional. The company that makes the program. Never an email.
 Date=October 6, 2016        ;required. Free text — see the note below.
 ```
 
-_The 1997 text also lists a `Developers` keyline holding a contact email address, and
-marks it required. **Do not write it.** A WIF file travels through forums and email
-attachments; an address embedded in one is a privacy and spam risk to whoever put it
-there, and no reader needs it. Omit the keyline; if some strict reader forces the issue,
-use a shared project address, never a person's. Readers should ignore it. `Date` has no
-dependable format — see [Notes for implementers](#the-date-keyline-is-free-text)._
+**`Developers` differs from the 1997 text.** The 1997 text describes `Developers` as a
+contact email address and makes it required. In practice, programs write the name of the
+company or developer that makes them: TempoWeave writes `Developers=LoftyFiber`, and WeaveIt
+for Windows writes `Developers=Canyon Art`. This tells apart programs whose `Source Program`
+names are alike. This guide follows that practice:
+
+- `Developers` is **optional**. A reader must not require it.
+- When present, it holds a **company or developer name**.
+- It is **never an email address**. A WIF file travels through forums and email
+  attachments; an address in one is a privacy and spam risk to whoever put it there, and no
+  reader needs it. A reader should ignore an email address found there.
+
+`Date` has no dependable format — see
+[Notes for implementers](#the-date-keyline-is-free-text).
 
 ### CONTENTS
 
 A table of contents listing the other sections in the file.
 
-**In the file** — required by the 1997 text. Boolean keylines keyed by section name; only
-`true` entries are meaningful. Treat it as a **hint, not the source of truth**: scan the
+**In the file** — required by the 1997 text, so always write it. Boolean keylines keyed by
+section name; only `true` entries are meaningful. When reading, treat it as a **hint, not the
+source of truth**: scan the
 file for actual `[SECTION]` headers instead (see
 [Notes for implementers](#dont-trust-contents)).
 
@@ -159,7 +147,7 @@ WEFT=1
 THREADING=1
 TIEUP=1
 TREADLING=1
-LIFTPLAN=0
+LIFTPLAN=1
 ```
 
 ---
@@ -239,16 +227,15 @@ Both sections have the same keylines.
 [WARP]         (and, identically, [WEFT])
 Threads=8      ;required (Integer > 0). The number of ends (or picks).
 Color=1        ;optional. Default color as an index into the COLOR TABLE.
-Units=Inches   ;required if Spacing or Thickness is present.
-               ;one of Decipoints, Inches, Centimeters.
+Units=Inches   ;required if Spacing, Thickness, or any spacing or thickness section
+               ;is present. Inches or Centimeters.
 Spacing=0.05   ;optional (Real >= 0). Center-to-center distance between ends, in Units
-               ;— i.e. 1 / sett. 0.05 in = 20 ends per inch.
+               ;— that is, 1 / sett. 0.05 in = 20 ends per inch.
 Thickness=0.05 ;optional (Real >= 0). Visual width of the yarn, in Units.
 ```
 
 - `Color` may appear as a bare index (`1`) or, in older files, as `index,R,G,B`. Read the
   first number; ignore any trailing RGB. Decode it as an array so old files still load.
-- WeaveIt treats `Decipoints` as `Inches`.
 
 ---
 
@@ -273,7 +260,8 @@ Which shaft each warp end passes through, read across the warp from one edge.
 ```
 
 - `1=1,5` means end 1 is threaded through heddles on **both** shaft 1 and shaft 5. This is
-  rare; WeaveIt reads a single shaft per end.
+  rare; see [Ends on more than one shaft](#ends-on-more-than-one-shaft) for what it means at
+  the loom and in a drawdown.
 - An end with no keyline is on shaft `0` — not threaded (see
   [Default values and sparse data](#default-values-and-sparse-data)).
 
@@ -350,7 +338,7 @@ and what number range the color channels use; `[COLOR TABLE]` lists the colors.
 ```
 [COLOR PALETTE]
 Entries=2     ;required (Integer > 0). Number of rows in COLOR TABLE.
-Range=0,255   ;required (Integer,Integer). Min and max value for each R, G, B channel.
+Range=0,255   ;required (Array of two Integers). Min and max value for each R, G, B channel.
 
 [COLOR TABLE]
 1=32,32,32    ;color 1 as R,G,B, each within Range
@@ -415,8 +403,9 @@ Room for a program to store data that WIF does not model, without breaking other
 
 **In the file** — the section name is `[PRIVATE <SourceID> <SectionName>]`, where
 `<SourceID>` is a short tag unique to the program that wrote it. A program that does not
-recognize a private section skips it. **No line inside a private section may begin with
-`[`** — that is how a reader finds where the next real section starts.
+recognize a private section skips it, so the section is lost if that program saves the file
+again. **No line inside a private section may begin with `[`** — that is how a reader finds
+where the next real section starts.
 
 ```
 [PRIVATE WEAVEIT AWESOME]
@@ -450,6 +439,7 @@ WEFT=1
 THREADING=1
 TIEUP=1
 TREADLING=1
+LIFTPLAN=1
 WARP COLORS=1
 WEFT COLORS=1
 
@@ -503,6 +493,16 @@ Spacing=0.05
 6=2
 7=3
 8=4
+
+[LIFTPLAN]
+1=1,2            ;the same lifts as the tie-up and treadling, for programs
+2=2,3            ;that read only the lift plan
+3=3,4
+4=1,4
+5=1,2
+6=2,3
+7=3,4
+8=1,4
 
 [WARP COLORS]
 2=2             ;ends 2, 4, 6, 8 are light; the rest stay dark
@@ -563,6 +563,21 @@ current WeaveIt applications do; older versions wrote one or the other.
 flips which face of the cloth the drawdown shows. Assume rising if the keyline is missing,
 and always write it.
 
+### Ends on more than one shaft
+
+A `[THREADING]` keyline may name more than one shaft, such as `1=1,5`. At the loom this
+needs *long-eyed heddles*: their tall eye lets the end rise with one shaft without being
+held down by the other. With ordinary heddles, the two shafts pull the end in opposite
+directions, and the shed does not open cleanly. Weavers use it for double-harness work such
+as damask, which has one set of shafts for the pattern and another for the ground.
+
+- **In the drawdown,** on a rising-shed loom, the end is up on a pick if **any** of its
+  shafts is raised.
+- **Store threading as an array**, as you would treadling.
+- **If your program allows only one shaft per end,** keep the first shaft, and tell the
+  user that the drawdown may differ from the original. Never treat such an end as
+  unthreaded.
+
 ### Multi-treadling
 
 A `[TREADLING]` keyline may name more than one treadle. Store treadling as an array, not a
@@ -577,16 +592,52 @@ non-UTF-8 bytes; or a private-section line that begins with `[`.
 
 ## Obsolete and unsupported
 
-The following are part of the historical format but are ignored by current weaving
-software, WeaveIt included. Read them only for compatibility; never write them.
+This guide limits itself to what the [Canyon Art WeaveIt](https://weaveit.com/) applications
+read and write. Their author was one of the original WIF 1.1 developers, so where those
+applications ignore a part of the format, this guide treats that part as deprecated and
+describes it only briefly here.
 
-### Symbols
+Each deprecated part follows one of two rules:
+
+| Rule | Applies to | Why |
+| --- | --- | --- |
+| **[Do not write](#do-not-write)** | Email addresses and other contact details, zoom, bitmap, translations, design, the old color keylines, `Profile`, `Units=Decipoints` | Each one exposes personal information, was never implemented, has been replaced, or means different things to different programs. The reason for each is below. |
+| **[Do not depend on other programs keeping it](#do-not-depend-on-other-programs-keeping-it)** | Symbols, and [private sections](#private-sections) | Writing them is allowed. But most programs skip them, and drop them when they save the file again. |
+
+### Do not write
+
+A reader may come across these in older files and can read them for compatibility. A
+writer should never write them, for the reason given:
+
+| Part | Why not to write it |
+| --- | --- |
+| An email address in `[WIF]` `Developers=`, or any other email keyline | **Personal information.** A WIF file travels through forums and email; an address in it is a privacy and spam risk to whoever put it there, and no reader needs it. Ignore it when reading. `Developers` itself may hold a company name; see [WIF](#wif). |
+| `[TEXT]`: `Address=`, `EMail=`, `Telephone=`, `FAX=` | **Personal information**, for the same reason. Ignore it when reading. |
+| `[WARP SPACING ZOOM]`, `[WARP THICKNESS ZOOM]`, `[WEFT SPACING ZOOM]`, `[WEFT THICKNESS ZOOM]`, and the `Spacing Zoom` / `Thickness Zoom` keylines in `[WARP]` / `[WEFT]` | **Never implemented.** A magnification factor for variable-spacing drafts that no current program uses, so no reader would apply it. |
+| `[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]` | **Never implemented.** Reserved in 1996; support was suspended at version 1.1. |
+| `[TRANSLATIONS]` | **Never implemented.** Meant for translating key names; suspended at version 1.1. |
+| `[DESIGN]` | **Removed** at version 1.1. |
+| `[WARP]` / `[WEFT]`: `Colors=`, `Palette=`, `ColorMix=` | **Replaced** by `[COLOR PALETTE]` and `[COLOR TABLE]`. Writing both risks two different colors for the same thread. |
+| `[WEAVING]`: `Profile=` | **Obsolete.** No current program uses it. |
+| `[WARP]` / `[WEFT]`: `Units=Decipoints` | **Programs disagree on what it means.** Some read it as inches; others convert it at 720 decipoints to the inch. Write `Inches` or `Centimeters`. When reading, treat it as `Inches`. |
+
+### Do not depend on other programs keeping it
+
+These are still part of WIF 1.1, and writing them is allowed. But most weaving programs,
+WeaveIt included, skip them, and a program that skips a section also drops it when it saves
+the file again. Write them if your program uses them, but don't put anything there that the
+draft can't do without.
+
+- **[Private sections](#private-sections)**, which hold one program's own data.
+- **Symbols**, below.
+
+#### Symbols
 
 `[WARP SYMBOL PALETTE]`, `[WEFT SYMBOL PALETTE]`, `[WARP SYMBOL TABLE]`,
 `[WEFT SYMBOL TABLE]`, `[WARP SYMBOLS]`, `[WEFT SYMBOLS]`.
 
-These let a draft be drawn with a letter or mark per yarn instead of a color. Modern
-programs, including WeaveIt, do not use them. If you must read them:
+These let a draft be drawn with a letter or mark per yarn instead of a color. Most
+programs, including the WeaveIt applications, do not use them. If you read or write them:
 
 - `[* SYMBOL PALETTE]` has `Entries=n`, the size of the symbol table.
 - `[* SYMBOL TABLE]` maps `index` → a **WIF Symbol** value.
@@ -603,38 +654,10 @@ A **WIF Symbol** value is one of:
 
 A space must be written `' '` or `#32`; a `#` must be written `'#'` or `#35`.
 
-### Zoom
-
-`[WARP SPACING ZOOM]`, `[WARP THICKNESS ZOOM]`, `[WEFT SPACING ZOOM]`,
-`[WEFT THICKNESS ZOOM]`, and the `Spacing Zoom` / `Thickness Zoom` keylines in `[WARP]` /
-`[WEFT]`. A magnification factor for variable-spacing drafts. Not implemented in current
-software.
-
-### Bitmap
-
-`[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]`. Reserved in 1996, never
-implemented; support was suspended at version 1.1.
-
-### Translations
-
-`[TRANSLATIONS]`. Intended for localizing key names. Suspended at version 1.1.
-
-### Obsolete keylines
-
-Silently ignore these; they are left in the format only for completeness:
-
-- `[WIF]`: `Developers=` and any email keyline. Deprecated here on privacy grounds — a
-  shared file should not carry a contact address. Ignore on read; never write it.
-- `[TEXT]`: `Address=`, `EMail=`, `Telephone=`, `FAX=` — same reason.
-- `[WARP]` / `[WEFT]`: `Colors=`, `Palette=`, `ColorMix=` (superseded by the color table).
-- `[WEAVING]`: `Profile=`.
-- The `[DESIGN]` section (dropped at version 1.1).
+<div class="github-only" markdown="1">
 
 ---
 
-## License
+© 2026 the WIF-Format contributors. Licensed under [CC BY 4.0](../LICENSE). The WIF format is by Ravi Nielsen (Maple Hill Software) and the 1996–97 WIF developer groups; original text © 1996, 1997 Ravi Nielsen. The format itself is a shared standard, owned by no one.
 
-Copyright © 2026 Shannon Young. Licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See
-[License and attribution](../README.md#license-and-attribution) — this guide does not copy or
-adapt the original specification, and nothing here claims any right in the format itself.
+</div>
