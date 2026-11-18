@@ -20,44 +20,19 @@ The same format is also written up as reference tables in the
 > that declares the `.wif` file type the wrong way can stop every other weaving app on the
 > same device from opening `.wif` files.
 
-### Scope
-
-This guide limits itself to what the [Canyon Art WeaveIt](https://weaveit.com/) applications read and write. Their author was
-one of the original WIF 1.1 developers, so where those applications ignore a part of the
-format, this guide treats that part as **effectively deprecated** and describes it only
-briefly, under [Obsolete and unsupported](#obsolete-and-unsupported).
-
 ---
 
 ## Terminology
 
-### At the loom
-
-| Term | Meaning |
-| --- | --- |
-| **warp** | The threads held under tension on the loom, running the length of the cloth. |
-| **weft** | The threads carried across the warp, one row at a time. |
-| **end** | A single warp thread. |
-| **pick** | A single weft thread — one row of weaving. |
-| **shaft** | A frame that raises or lowers a group of ends. Also called a *harness*. |
-| **heddle** | A loop on a shaft that one end passes through. |
-| **treadle** | A foot pedal on a floor loom. Pressing it moves the shafts tied to it. |
-| **threading** | Which shaft each end passes through, read across the warp. |
-| **tie-up** | Which shafts each treadle is connected to. |
-| **treadling** | The order in which the treadles are pressed, one entry per pick. |
-| **lift plan** | The shafts raised for each pick, given directly — used instead of a tie-up and treadling. |
-| **rising / sinking shed** | Whether the loom raises the selected shafts (jack / rising shed) or lowers them (countermarch, counterbalance / sinking shed). |
-| **sett** | How closely the ends are spaced, usually in ends per inch (EPI). Picks per inch (PPI) is the weft equivalent. |
-| **drawdown** | The picture of the finished cloth produced by combining threading, tie-up / lift plan, and treadling. |
-
-### In the file
+For weaving words such as *warp*, *end*, *shaft* and *tie-up*, see
+[Weaving terms](../glossary.md). This guide also uses these words for the parts of the file:
 
 | Term | Meaning |
 | --- | --- |
 | **section** | A named block, written `[SECTION NAME]`, containing keylines. |
 | **keyline** | One `Key=Value` line inside a section. |
 | **map** | A section whose keys are either integers (`1`, `2`, `3`, …) or names. WIF sections are all maps. |
-| **array** | A comma-separated list of values in a single keyline, e.g. `1,3,5`. |
+| **array** | A comma-separated list of values in a single keyline, for example `1,3,5`. |
 
 ---
 
@@ -577,6 +552,11 @@ non-UTF-8 bytes; or a private-section line that begins with `[`.
 ---
 
 ## Obsolete and unsupported
+
+This guide limits itself to what the [Canyon Art WeaveIt](https://weaveit.com/) applications read and write. Their author was
+one of the original WIF 1.1 developers, so where those applications ignore a part of the
+format, this guide treats that part as **effectively deprecated** and describes it only
+briefly here.
 
 The following are part of the historical format but are ignored by current weaving
 software, WeaveIt included. Read them only for compatibility; never write them.

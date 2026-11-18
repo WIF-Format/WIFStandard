@@ -67,6 +67,9 @@ defaults:
   - scope: { path: "ios-macos-uti/README.md" }
     values: { title: Sharing .wif on macOS and iOS, nav_order: 4 }
 
+  - scope: { path: "glossary.md" }
+    values: { title: Weaving terms, nav_order: 5 }
+
   # WIF 1.1 — current standard
   - scope: { path: "v1.1/README.md" }
     values: { title: "WIF 1.1 (current standard)", nav_order: 2, has_children: true }

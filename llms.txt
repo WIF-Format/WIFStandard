@@ -8,6 +8,7 @@ Each version has a plain-language guide, a reference specification (a JSON Schem
 
 - [Overview](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/README.md): what WIF is, the versions and their status, weaving terms, file types, history, license
 - [Developer Guide: Sharing the .wif Format on macOS and iOS](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/ios-macos-uti/README.md): required reading for any macOS or iOS app that opens or saves .wif files: declare the shared UTI `org.wif-format.wif` exactly as shown, so your app does not stop other weaving apps from opening .wif files; concepts, iOS and macOS Info.plist code, how to check the result, common mistakes
+- [Weaving terms](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/glossary.md): warp, weft, end, pick, shaft, tie-up, lift plan and the other weaving words used on every page
 - [Proposals under discussion](https://raw.githubusercontent.com/WIF-Format/WIFStandard/main/proposals.md): the WIF 1.2 and WIF 2 drafts, their status, and where to comment
 
 ## WIF 1.1 (current standard)

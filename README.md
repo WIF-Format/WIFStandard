@@ -64,23 +64,8 @@ Each version folder holds the same kinds of file:
 
 ## Weaving terms
 
-These terms are used the same way in every version.
-
-| Term | Meaning |
-| --- | --- |
-| **warp** | The threads held under tension on the loom, running the length of the cloth. |
-| **weft** | The threads carried across the warp, one row at a time. |
-| **end** | A single warp thread. |
-| **pick** | A single weft thread — one row of weaving. |
-| **shaft** | A frame that raises or lowers a group of ends. Also called a *harness*. |
-| **treadle** | A foot pedal on a floor loom. Pressing it moves the shafts tied to it. |
-| **threading** | Which shaft each end passes through, read across the warp. |
-| **tie-up** | Which shafts each treadle is connected to. |
-| **treadling** | The order in which the treadles are pressed, one entry per pick. |
-| **lift plan** | The shafts raised for each pick, given directly — used instead of a tie-up and treadling. |
-| **rising / sinking shed** | Whether the loom raises the selected shafts (jack loom) or lowers them (countermarch, counterbalance). |
-| **sett** | How closely the ends are spaced, usually in ends per inch (EPI). Picks per inch (PPI) is the weft equivalent. |
-| **drawdown** | The picture of the finished cloth produced by combining threading, tie-up / lift plan, and treadling. |
+Weaving words used on this site, such as *warp*, *end*, *shaft* and *tie-up*, are explained on
+the [Weaving terms](glossary.md) page.
 
 ---
 
