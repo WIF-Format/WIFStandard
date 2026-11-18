@@ -64,3 +64,16 @@ input:focus-visible {
 // Content meant only for readers on GitHub, such as the README's pointer
 // to this website. GitHub ignores the class and shows it as usual.
 .github-only { display: none; }
+
+// Photo banner above every page, matching wif-format.org.
+.wif-banner {
+  margin: 0 0 1rem;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+}
