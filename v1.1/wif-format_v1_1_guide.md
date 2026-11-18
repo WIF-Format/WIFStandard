@@ -2,8 +2,9 @@
 
 WIF 1.1 is the current WIF format, unchanged since 1997. It is a plain-text format, based
 on the [INI file](https://en.wikipedia.org/wiki/INI_file) convention, and it was designed
-to be read by a person as easily as by a program. For the format's history and the other
-versions, see the [overview](../README.md).
+to be read by a person as easily as by a program. For the format's history, see the
+[overview](../README.md); ideas for future versions are on
+[Proposals under discussion](../proposals.md).
 
 This guide is a plain-language description of WIF 1.1 as it is actually used today,
 written for two readers at once: a **weaver**, who knows what a threading or a tie-up is
@@ -41,9 +42,9 @@ For weaving words such as *warp*, *end*, *shaft* and *tie-up*, see
 | Type | Notes |
 | --- | --- |
 | **Integer** | A whole number. Treat it as 32-bit. |
-| **Real** | A decimal number, e.g. `0.05` or `24`. The 1997 text calls this *real*; some call it *double*. |
+| **Real** | A decimal number, with a period as the decimal point, for example `0.05` or `24`. The 1997 text calls this *real*; some call it *double*. |
 | **String** | Text. The 1997 text says ASCII; in practice see [Text encoding](#text-encoding). |
-| **Boolean** | True is any of `true`, `on`, `yes`, `1`; false is any of `false`, `off`, `no`, `0`. An absent optional boolean is false. |
+| **Boolean** | True is any of `true`, `on`, `yes`, `1`; false is any of `false`, `off`, `no`, `0`. An absent optional boolean is false, except `Rising Shed` (see [WEAVING](#weaving)). |
 | **Array** | A comma-separated list of one of the above in a single keyline. An empty list and an omitted keyline mean the same thing. |
 
 ---
@@ -70,6 +71,7 @@ Key=Value
 - **Duplicate keys.** Writing the same key twice in one section is an error. A reader may
   keep the first or the last; it should not crash.
 - **Line endings.** Files use CRLF or LF, and sometimes both in one file. Accept any.
+- **Empty sections.** A section with no keylines is treated as absent.
 
 ### Default values and sparse data
 
@@ -122,8 +124,9 @@ dependable format — see [Notes for implementers](#the-date-keyline-is-free-tex
 
 A table of contents listing the other sections in the file.
 
-**In the file** — required by the 1997 text. Boolean keylines keyed by section name; only
-`true` entries are meaningful. Treat it as a **hint, not the source of truth**: scan the
+**In the file** — required by the 1997 text, so always write it. Boolean keylines keyed by
+section name; only `true` entries are meaningful. When reading, treat it as a **hint, not the
+source of truth**: scan the
 file for actual `[SECTION]` headers instead (see
 [Notes for implementers](#dont-trust-contents)).
 
@@ -135,7 +138,7 @@ WEFT=1
 THREADING=1
 TIEUP=1
 TREADLING=1
-LIFTPLAN=0
+LIFTPLAN=1
 ```
 
 ---
@@ -215,16 +218,15 @@ Both sections have the same keylines.
 [WARP]         (and, identically, [WEFT])
 Threads=8      ;required (Integer > 0). The number of ends (or picks).
 Color=1        ;optional. Default color as an index into the COLOR TABLE.
-Units=Inches   ;required if Spacing or Thickness is present.
-               ;one of Decipoints, Inches, Centimeters.
+Units=Inches   ;required if Spacing, Thickness, or any spacing or thickness section
+               ;is present. Inches or Centimeters.
 Spacing=0.05   ;optional (Real >= 0). Center-to-center distance between ends, in Units
-               ;— i.e. 1 / sett. 0.05 in = 20 ends per inch.
+               ;— that is, 1 / sett. 0.05 in = 20 ends per inch.
 Thickness=0.05 ;optional (Real >= 0). Visual width of the yarn, in Units.
 ```
 
 - `Color` may appear as a bare index (`1`) or, in older files, as `index,R,G,B`. Read the
   first number; ignore any trailing RGB. Decode it as an array so old files still load.
-- WeaveIt treats `Decipoints` as `Inches`.
 
 ---
 
@@ -326,7 +328,7 @@ and what number range the color channels use; `[COLOR TABLE]` lists the colors.
 ```
 [COLOR PALETTE]
 Entries=2     ;required (Integer > 0). Number of rows in COLOR TABLE.
-Range=0,255   ;required (Integer,Integer). Min and max value for each R, G, B channel.
+Range=0,255   ;required (Array of two Integers). Min and max value for each R, G, B channel.
 
 [COLOR TABLE]
 1=32,32,32    ;color 1 as R,G,B, each within Range
@@ -426,6 +428,7 @@ WEFT=1
 THREADING=1
 TIEUP=1
 TREADLING=1
+LIFTPLAN=1
 WARP COLORS=1
 WEFT COLORS=1
 
@@ -479,6 +482,16 @@ Spacing=0.05
 6=2
 7=3
 8=4
+
+[LIFTPLAN]
+1=1,2            ;the same lifts as the tie-up and treadling, for programs
+2=2,3            ;that read only the lift plan
+3=3,4
+4=1,4
+5=1,2
+6=2,3
+7=3,4
+8=1,4
 
 [WARP COLORS]
 2=2             ;ends 2, 4, 6, 8 are light; the rest stay dark
@@ -609,6 +622,7 @@ Silently ignore these; they are left in the format only for completeness:
 - `[TEXT]`: `Address=`, `EMail=`, `Telephone=`, `FAX=` — same reason.
 - `[WARP]` / `[WEFT]`: `Colors=`, `Palette=`, `ColorMix=` (superseded by the color table).
 - `[WEAVING]`: `Profile=`.
+- `[WARP]` / `[WEFT]`: `Units=Decipoints`. Treat it as `Inches`, as WeaveIt does.
 - The `[DESIGN]` section (dropped at version 1.1).
 
 <div class="github-only" markdown="1">

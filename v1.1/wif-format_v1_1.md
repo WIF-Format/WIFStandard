@@ -1,6 +1,6 @@
 # WIF File Format Specification
 
-**Version:** 1.1 · **Effective:** 1997 · **Author:** Shannon Young, describing the format by Ravi Nielsen and the 1996–97 WIF developer groups
+**Version:** 1.1 · **Effective:** 1997 · **Format by:** Ravi Nielsen and the 1996–97 WIF developer groups
 
 This is a reference-style companion to the plain-language [WIF 1.1 guide](wif-format_v1_1_guide.md). It
 covers the same format and the same scope — what the WeaveIt applications read and write —
@@ -21,12 +21,12 @@ character is `;` is a comment. All indices — ends, picks, shafts, treadles, co
 | --- | --- |
 | Encoding | Write UTF-8. Read UTF-8 first; fall back to ISO-8859-1. |
 | Line endings | Write either. Read CRLF, LF, or a mix. |
-| Comments | `;` at line start. Inline `;` after a number or bool is a comment; after a string it is literal text. |
+| Comments | `;` at line start. Inline `;` after a number or boolean is a comment; after a string it is literal text. |
 | Case | Section and key names are case-insensitive. |
 | Order | Sections, and keylines within a section, may appear in any order. |
 | Duplicate keys | An error. Keep the first or the last; do not crash. |
 | Empty section | Treat as absent. |
-| Decimals | Period separator, e.g. `0.05`. |
+| Decimals | A period is the decimal point, for example `0.05`. |
 
 #### 1.2 Data types
 
@@ -34,16 +34,16 @@ character is `;` is a comment. All indices — ends, picks, shafts, treadles, co
 | --- | --- |
 | string | Free text to end of line. |
 | integer | Whole number. Treat as 32-bit. |
-| decimal | Real number, e.g. `0.05` or `24`. |
-| bool | True: `true`, `on`, `yes`, `1`. False: `false`, `off`, `no`, `0`. Absent optional bool is false. |
-| list | Comma-separated values of one type, e.g. `1,3,5`. Empty list and omitted keyline are equivalent. |
+| real | A decimal number, for example `0.05` or `24`. |
+| boolean | True: `true`, `on`, `yes`, `1`. False: `false`, `off`, `no`, `0`. An absent optional boolean is false, except `Rising Shed`. |
+| array | Comma-separated values of one type, for example `1,3,5`. An empty array and an omitted keyline are equivalent. |
 
 #### 1.3 Defaults and sparse data
 
 Row sections (`[THREADING]`, `[TREADLING]`, `[LIFTPLAN]`, `[WARP COLORS]`, `[WEFT COLORS]`,
 and the spacing and thickness sections) need not list every end or pick. A reader:
 
-1. Creates `[WARP] Threads` ends and `[WEFT] Threads` picks.
+1. Creates `[WARP].Threads` ends and `[WEFT].Threads` picks.
 2. Gives each the `[WARP]` / `[WEFT]` default `Color`, `Spacing`, and `Thickness`, and sets
    every shaft and treadle to `0` (unused).
 3. Applies the keylines present in the file over those defaults.
@@ -65,7 +65,7 @@ A writer may omit any keyline equal to its default, or write them all.
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| *section name* | bool | One keyline per section present, e.g. `WEAVING=1`. Only true entries are meaningful. |
+| *section name* | boolean | One keyline per section present, for example `WEAVING=1`. Only true entries are meaningful. |
 
 Readers build the section list by scanning for headers, not from `[CONTENTS]`.
 
@@ -93,7 +93,7 @@ lift plan.
 | --- | --- | --- |
 | `Shafts` | integer | Required. > 0. |
 | `Treadles` | integer | Required. > 0. Use the shaft count if the loom has no treadles. |
-| `Rising Shed` | bool | Optional. `1` raises the selected shafts; `0` lowers them. Always write it; assume `1` if absent. |
+| `Rising Shed` | boolean | Optional. `1` raises the selected shafts; `0` lowers them. Always write it. If absent, assume `1`: an exception to the rule that an absent boolean is false. |
 
 #### 1.7 Warp and weft sections
 
@@ -104,8 +104,8 @@ lift plan.
 | `Threads` | integer | Required. > 0. Number of ends (or picks). |
 | `Color` | integer | Optional. Default color, as a `[COLOR TABLE]` index. Older files write `index,R,G,B`; read the first value. |
 | `Units` | string | Required if `Spacing`, `Thickness`, or any spacing or thickness section is present. `Inches` or `Centimeters`. |
-| `Spacing` | decimal | Optional. ≥ 0. Center-to-center distance, in `Units`. Equals 1 / sett. |
-| `Thickness` | decimal | Optional. ≥ 0. Drawn yarn width, in `Units`. |
+| `Spacing` | real | Optional. ≥ 0. Center-to-center distance, in `Units`. Equals 1 / sett. |
+| `Thickness` | real | Optional. ≥ 0. Drawn yarn width, in `Units`. |
 
 #### 1.8 Color sections
 
@@ -115,19 +115,19 @@ used.
 | Key | Type | Notes |
 | --- | --- | --- |
 | `Entries` | integer | Required. > 0. Row count of `[COLOR TABLE]`. |
-| `Range` | list | Required. `min,max` for each channel. Almost always `0,255`. |
+| `Range` | array | Required. Two integers, `min,max`, for each channel. Almost always `0,255`. |
 
 **`[COLOR TABLE]`** — The colors.
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| *color index* | list | `R,G,B`, each within `Range`. Scale to 8-bit with `(v - min) * 255 / (max - min)`. |
+| *color index* | array | `R,G,B`, each within `Range`. Scale to 8-bit with `(v - min) * 255 / (max - min)`. |
 
 **`[WARP COLORS]`** and **`[WEFT COLORS]`** — Per-end and per-pick color.
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| *end* / *pick* | integer | `[COLOR TABLE]` index. Absent → `[WARP]` / `[WEFT]` `Color`. Older files write `index,R,G,B`; read the first value. |
+| *end* / *pick* | integer | `[COLOR TABLE]` index. Absent → `[WARP].Color` / `[WEFT].Color`. Older files write `index,R,G,B`; read the first value. |
 
 #### 1.9 Spacing and thickness sections
 
@@ -136,7 +136,7 @@ Per-end and per-pick overrides.
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| *end* / *pick* | decimal | In `[WARP]` / `[WEFT]` `Units`. Absent → the `Spacing` or `Thickness` default. |
+| *end* / *pick* | real | In `[WARP].Units` / `[WEFT].Units`. Absent → the `Spacing` or `Thickness` default. |
 
 #### 1.10 Structure sections
 
@@ -153,7 +153,7 @@ A file may carry all four.
 4=4
 ```
 
-Key is the end; value is a list of shafts. More than one shaft per end is legal but rare.
+Key is the end; value is an array of shafts. More than one shaft per end is legal but rare.
 Absent end → shaft `0`, unthreaded.
 
 **`[TIEUP]`** (with `[TREADLING]`) — Shafts tied to each treadle.
@@ -166,7 +166,7 @@ Absent end → shaft `0`, unthreaded.
 4=1,4
 ```
 
-Key is the treadle; value is a list of shafts, each ≤ `[WEAVING] Shafts`. Value `0` or absent
+Key is the treadle; value is an array of shafts, each ≤ `[WEAVING].Shafts`. Value `0` or absent
 → treadle unused.
 
 **`[TREADLING]`** (with `[TIEUP]`) — Treadles pressed for each pick.
@@ -179,8 +179,8 @@ Key is the treadle; value is a list of shafts, each ≤ `[WEAVING] Shafts`. Valu
 4=4
 ```
 
-Key is the pick; value is a list of treadles. More than one treadle is multi-treadling; store
-as a list. Value `0` → no treadle pressed.
+Key is the pick; value is an array of treadles. More than one treadle is multi-treadling; store
+it as an array. Value `0` → no treadle pressed.
 
 **`[LIFTPLAN]`** — Shafts raised for each pick, without treadles.
 
@@ -192,7 +192,7 @@ as a list. Value `0` → no treadle pressed.
 4=1,4
 ```
 
-Key is the pick; value is a list of shafts.
+Key is the pick; value is an array of shafts.
 
 **Reading.** When `[TIEUP]`, `[TREADLING]`, and `[LIFTPLAN]` are all present, use the tie-up
 and treadling. Fall back to the lift plan only if either is missing.
@@ -233,17 +233,18 @@ Read only for compatibility. Never write.
 | `[BITMAP FILE]`, `[BITMAP IMAGE]`, `[BITMAP IMAGE DATA]` | Never implemented. Suspended at 1.1. |
 | `[TRANSLATIONS]` | Suspended at 1.1. |
 | `[DESIGN]` | Dropped at 1.1. |
-| `[WIF] Developers` | Contact address. Privacy risk; ignore. |
-| `[TEXT] Address`, `EMail`, `Telephone`, `FAX` | Personal contact data. Privacy risk; ignore. |
-| `[WARP]` / `[WEFT]` `Colors`, `Palette`, `ColorMix` | Superseded by the color table. |
-| `[WEAVING] Profile` | Obsolete. |
-| `Units=Decipoints` | Treat as `Inches`. |
+| `[WIF]`: `Developers` | Contact address. Privacy risk; ignore. |
+| `[TEXT]`: `Address`, `EMail`, `Telephone`, `FAX` | Personal contact data. Privacy risk; ignore. |
+| `[WARP]` / `[WEFT]`: `Colors`, `Palette`, `ColorMix` | Superseded by the color table. |
+| `[WEAVING]`: `Profile` | Obsolete. |
+| `[WARP]` / `[WEFT]`: `Units=Decipoints` | Treat as `Inches`. |
 
 ---
 
 ### 4. Integration notes
 
-- **Platform file type.** On macOS and iOS, declare the shared UTI `org.wif-format.wif`. See
+- **Platform file type.** On macOS and iOS, declare the shared Uniform Type Identifier (the
+  name Apple systems use for a file type) `org.wif-format.wif`. See
   the [Developer Guide: Sharing the .wif Format on macOS and iOS](../ios-macos-uti/README.md).
 - **Interoperability.** Files most often fail to open elsewhere because of a missing
   `[COLOR PALETTE]` / `[COLOR TABLE]`, a malformed `[CONTENTS]`, non-UTF-8 bytes, or a private
@@ -256,7 +257,8 @@ Read only for compatibility. Never write.
 
 - **Guide:** [wif-format_v1_1_guide.md](wif-format_v1_1_guide.md)
 - **Example file:** [twill-color-and-weave.wif](twill-color-and-weave.wif)
-- **Overview of all versions:** [README.md](../README.md)
+- **Overview:** [README.md](../README.md)
+- **Ideas for future versions:** [Proposals under discussion](../proposals.md)
 - **Historical:** [Original WIF 1.1 text](http://www.tantradharma.com/maplehill/wif/wif1-1.txt)
 - **Project site:** [wif-format.org](https://wif-format.org)
 - **Discussion:** [github.com/WIF-Format/WIFStandard](https://github.com/WIF-Format/WIFStandard)

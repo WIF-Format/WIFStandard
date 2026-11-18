@@ -12,6 +12,7 @@ WEFT=1
 THREADING=1
 TIEUP=1
 TREADLING=1
+LIFTPLAN=1
 WARP COLORS=1
 WEFT COLORS=1
 
@@ -65,6 +66,16 @@ Spacing=0.05
 6=2
 7=3
 8=4
+
+[LIFTPLAN]
+1=1,2            ;the same lifts as the tie-up and treadling, for programs
+2=2,3            ;that read only the lift plan
+3=3,4
+4=1,4
+5=1,2
+6=2,3
+7=3,4
+8=1,4
 
 [WARP COLORS]
 2=2             ;ends 2, 4, 6, 8 are light; the rest stay dark
