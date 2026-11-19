@@ -36,5 +36,5 @@ Each version has a plain-language guide, a reference specification (a JSON Schem
 
 ## Optional
 
-- [Original WIF 1.1 text (historical)](http://www.tantradharma.com/maplehill/wif/wif1-1.txt): Copyright 1996, 1997 Ravi Nielsen; not reproduced on this site
+- [http://www.tantradharma.com/maplehill/wif/wif.html](http://www.tantradharma.com/maplehill/wif/wif.html): the original WIF 1.1 page (historical), from Maple Hill Software; copyrighted, not reproduced on this site
 - [wif-format.org](https://wif-format.org): project site
