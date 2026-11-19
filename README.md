@@ -97,9 +97,12 @@ included Bob Keates (Fiberworks), Rob Sinkler (Swiftweave), Dana Cartwright (Wea
 Bjørn Myhre (WeavePoint), Jane Eisenstein, Sally Breckenridge (WeaveIt), Mark Kloosterman
 and Dini Cameron (ProWeave), Mitch Eatough, and Peter Straus (AVL).
 
-The format has not changed since version 1.1 in 1997. The
-[original WIF 1.1 text](http://www.tantradharma.com/maplehill/wif/wif1-1.txt) remains the
-historical source; nothing on this site reproduces it.
+The format has not changed since version 1.1 in 1997. The original WIF 1.1 text is still the
+historical source, and Maple Hill Software's page for it is still online at
+[http://www.tantradharma.com/maplehill/wif/wif.html](http://www.tantradharma.com/maplehill/wif/wif.html). That page was last updated on January 1, 2000, before most
+websites used secure (https) addresses, so some browsers show a warning when you open it. The
+text is copyrighted, so this site describes the format in its own words and does not reproduce
+it.
 
 More about the format and the software that supports it: [wif-format.org](https://wif-format.org).
 
@@ -118,7 +121,6 @@ They are licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)
 (CC BY 4.0). You are free to copy, translate, adapt, and redistribute them, for any purpose
 including commercially, as long as you give appropriate credit and indicate any changes.
-See [`LICENSE`](LICENSE).
 
 <div class="github-only" markdown="1">
 

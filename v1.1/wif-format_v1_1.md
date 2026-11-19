@@ -276,7 +276,7 @@ saves the file again. Do not rely on them for data the draft needs.
 - **Example file:** [twill-color-and-weave.wif](twill-color-and-weave.wif)
 - **Overview:** [README.md](../README.md)
 - **Ideas for future versions:** [Proposals under discussion](../proposals.md)
-- **Historical:** [Original WIF 1.1 text](http://www.tantradharma.com/maplehill/wif/wif1-1.txt)
+- **Historical:** the original WIF 1.1 page, [http://www.tantradharma.com/maplehill/wif/wif.html](http://www.tantradharma.com/maplehill/wif/wif.html)
 - **Project site:** [wif-format.org](https://wif-format.org)
 - **Discussion:** [github.com/WIF-Format/WIFStandard](https://github.com/WIF-Format/WIFStandard)
 
